@@ -43,7 +43,7 @@ let restart_game
 function preload(){
     stage = new createjs.Stage("gameArea");
     stage.mouseEventsEnabled = true;
-
+    createjs.Touch.enable(stage);
 
     pText = new createjs.Text("Loading", "30px VT323", "#FFF");
     pText.textBaseline="middle";
