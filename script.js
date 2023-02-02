@@ -340,9 +340,9 @@ function timedCount() {
  clearTimeout(timeout);
  alert('timesup');
 
- //parseInt(time.text)=60; 		//to avoid loop of timeout
+ time.text=parseInt(60); 		//to avoid loop of timeout
  
- //reset();
+ reset();
  timer_on = 0;
 
  //console.log("loop");
@@ -430,11 +430,32 @@ function alert(e){
       timesup.x = 0;
       timesup.y = -150;        
       Tween.get(timesup).to({y: 10}, 500);      
-      stage.addChild(timesup);
-      stage.removeChild(toggleAudio_game, restart_game);
+
+     
+
+      if(playerScore.text > cpuScore.text) {
+        
+        win = new createjs.Bitmap(queue.getResult('win'));
+        win.x = 15;
+        win.y = -150;
+        Tween.get(win).to({y: 70}, 500);
+        stage.addChild(timesup, win);
+    
+    }else {
+        
+        lose = new createjs.Bitmap(queue.getResult('lose'));
+        lose.x = 15;
+        lose.y = -150;        
+        Tween.get(lose).to({y: 70}, 500);      
+        stage.addChild(timesup, lose);        
+    }
+
+
       
   }
-    
+      
+        stage.removeChild(toggleAudio_game, restart_game);
+         
 }
 
 //score tracking to know if we should pop a win screen, a lose one or nothing 
@@ -453,7 +474,7 @@ function gameStatus() {
    loseSound.volume = 0.1;
   //  createjs.Touch.disable(stage);
   }
-if(time.text == '1'){
+if(time.text == '0'){
   alert('timesup');
 }
 
