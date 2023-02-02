@@ -215,8 +215,9 @@ function startGame(){
   stage.on("stagemousemove", function(evt) {
 
     player.y=evt.stageY;
-      console.log("stageX/Y: "+evt.stageX+","+evt.stageY); // always in bounds
-      console.log("rawX/Y: "+evt.rawX+","+evt.rawY); // could be < 0, or > width/height
+    //coordinates
+    //  console.log("stageX/Y: "+evt.stageX+","+evt.stageY); // always in bounds
+    //  console.log("rawX/Y: "+evt.rawX+","+evt.rawY); // could be < 0, or > width/height
   });
 
 
@@ -339,9 +340,9 @@ function timedCount() {
  clearTimeout(timeout);
  alert('timesup');
 
- parseInt(time.text)=60; 		//to avoid loop of timeout
+ //parseInt(time.text)=60; 		//to avoid loop of timeout
  
- reset();
+ //reset();
  timer_on = 0;
 
  //console.log("loop");
