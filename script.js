@@ -429,11 +429,12 @@ function alert(e){
       timesup.x = 0;
       timesup.y = -150;        
       Tween.get(timesup).to({y: 10}, 500);      
-
+console.log('time up')
       stage.addChild(timesup);
 
       if(playerScore.text > cpuScore.text) {
-        
+        console.log('time up win')
+
         win = new createjs.Bitmap(queue.getResult('win'));
         win.x = 15;
         win.y = -150;
@@ -441,7 +442,8 @@ function alert(e){
         stage.addChild(timesup, win);
     
     }else {
-        
+      console.log('time up lose')
+
         lose = new createjs.Bitmap(queue.getResult('lose'));
         lose.x = 15;
         lose.y = -150;        
