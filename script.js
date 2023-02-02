@@ -430,7 +430,7 @@ function alert(e){
       timesup.y = -150;        
       Tween.get(timesup).to({y: 10}, 500);      
 console.log('time up')
-      stage.addChild(timesup);
+
 
       if(playerScore.text > cpuScore.text) {
         console.log('time up win')
