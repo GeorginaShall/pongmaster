@@ -330,20 +330,27 @@ function hitWall(){
 
 function timedCount() {
   
-  if ( parseInt(time.text) > 0) {time.text = parseInt(time.text - 1);}
- else{ 
- 
- clearTimeout(timeout);
- alert('timesup');
+  if ( parseInt(time.text) > 0 && timer_on == 1)
+  
+  {time.text = parseInt(time.text - 1);}
 
- time.text=parseInt(60); 		//to avoid loop of timeout
- 
- reset();
+
+ if( parseInt(time.text) == 0) { 
+ alert('timesup');
+  		//to avoid loop of timeout
  timer_on = 0;
 
  //console.log("loop");
 
 }
+
+  if(timer_on == 0)
+  {reset();
+    clearTimeout(timeout);
+    
+    time.text=parseInt(60);
+  }
+
  timeout = setTimeout(timedCount, 1000);
 }
 
@@ -462,12 +469,12 @@ console.log('time up')
 //score tracking to know if we should pop a win screen, a lose one or nothing 
 function gameStatus() {
 
-  
+  if(settings.gameRunning == true){
   if (!timer_on) {
     timer_on = 1;
     timedCount();
   } 
-
+}
   if(playerScore.text == '3'){
    alert('win');
    
