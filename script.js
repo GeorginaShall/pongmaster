@@ -252,7 +252,7 @@ function startGame(){
      timer.x = 70;
      timer.y = 20;
 
-     time = new createjs.Text('60',  ' 30px VT323', '#fff');
+     time = new createjs.Text('10',  ' 30px VT323', '#fff');
      time.x = 150;
      time.y = 20;
 
@@ -306,6 +306,12 @@ function reset(){
 function moveBall(){
   ball.x = ball.x + xSpeed;
   ball.y = ball.y + ySpeed;
+
+  if (!timer_on) {
+    timer_on = 1;
+    timedCount();
+  } 
+
 }
 
 //when ball hits the wall
@@ -323,6 +329,25 @@ function hitWall(){
  let wallHitSound = createjs.Sound.play("wall");
  wallHitSound.volume = 0.1;
   };
+}
+
+function timedCount() {
+  
+  if ( parseInt(time.text) > 0) {time.text = parseInt(time.text - 1);}
+ else{ 
+ 
+ clearTimeout(timeout);
+ alert('timesup');
+
+ parseInt(time.text)=60; 		//to avoid loop of timeout
+ 
+ reset();
+ timer_on = 0;
+
+ //console.log("loop");
+
+}
+ timeout = setTimeout(timedCount, 1000);
 }
 
 function trackScore(){
@@ -385,7 +410,7 @@ function alert(e){
         stage.addChild(win);
         stage.removeChild(toggleAudio_game, restart_game);
         
-    }else{
+    }else if(e == 'lose'){
         settings.gameRunning=false;
         createjs.Sound.stop();
         lose = new createjs.Bitmap(queue.getResult('lose'));
@@ -396,6 +421,18 @@ function alert(e){
         stage.removeChild(toggleAudio_game, restart_game);
         
     }
+
+    else if(e == 'timesup'){
+      settings.gameRunning=false;
+      createjs.Sound.stop();
+      timesup = new createjs.Bitmap(queue.getResult('timesup'));
+      timesup.x = 0;
+      timesup.y = -150;        
+      Tween.get(timesup).to({y: 10}, 500);      
+      stage.addChild(timesup);
+      stage.removeChild(toggleAudio_game, restart_game);
+      
+  }
     
 }
 
@@ -415,6 +452,10 @@ function gameStatus() {
    loseSound.volume = 0.1;
   //  createjs.Touch.disable(stage);
   }
+if(time.text == '1'){
+  alert('timesup');
+}
+
 } 
 
 
