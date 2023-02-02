@@ -42,6 +42,7 @@ let restart_game
 //preloader
 function preload(){
     stage = new createjs.Stage("gameArea");
+    
     stage.mouseEventsEnabled = true;
 
     pText = new createjs.Text("Loading", "30px VT323", "#FFF");
@@ -205,6 +206,21 @@ function startGame(){
     window.addEventListener('keyup', fingerLifted);
     window.addEventListener('keydown', fingerDown);
 
+
+
+document.addEventListener("touchstart", touch2Mouse, true);
+document.addEventListener("touchmove", touch2Mouse, true);
+document.addEventListener("touchend", touch2Mouse, true);
+
+	// bg.onPress = null;
+	 stage.onMouseDown = selectPaddlem;
+	
+	// Ticker.addListener(tkr, false);
+	// tkr.tick = update;    console.log("start game func");
+
+
+
+
     player = new createjs.Bitmap(queue.getResult('playerPaddle'));
      player.x = 2;
      player.y = 160 - 37.5;
@@ -263,6 +279,31 @@ function movePaddle(){
     }
 }
 
+
+
+function selectPaddlem(e)
+{
+	stage.onMouseMove = movePaddlem;
+	console.log("select");
+}
+function movePaddlem(e)
+{
+	// Mouse Movement
+	
+	player.y = e.stageY;
+	console.log("move");
+	stage.onMouseUp= stopPaddle;
+}
+
+function stopPaddle(e)
+{	
+	player.y = player.y ;
+
+	stage.onMouseMove = null;
+
+	console.log("stop");
+
+}
 //reset funciton for when a point is scored. Basically resets the position of everything
 function reset(){
   ball.x = 240 - 15;
@@ -392,6 +433,27 @@ function resetGame() {
        location.reload()
       }
 } 
+
+function touch2Mouse(e)
+{
+  var theTouch = e.changedTouches[0];
+  var mouseEv;
+
+  switch(e.type)
+  {
+    case "touchstart": mouseEv="mousedown"; break;  
+    case "touchend":   mouseEv="mouseup"; break;
+    case "touchmove":  mouseEv="mousemove"; break;
+    default: return;
+  }
+
+  var mouseEvent = document.createEvent("MouseEvent");
+  mouseEvent.initMouseEvent(mouseEv, true, true, window, 1, theTouch.screenX, theTouch.screenY, theTouch.clientX, theTouch.clientY, false, false, false, false, 0, null);
+  theTouch.target.dispatchEvent(mouseEvent);
+
+  e.preventDefault();
+}
+
 
 function fingerLifted(e){
     switch(e.key){
