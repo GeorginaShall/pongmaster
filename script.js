@@ -1,3 +1,8 @@
+//let timeout;
+let counter = 0;
+let timeout;
+let timer_on = 0;
+
 
 "use strict";
 
@@ -25,6 +30,11 @@ let win;//win pop-up screen
 
 let playerScore;//player player score
 let cpuScore; //CPU score
+let timer;
+
+let time;
+
+
 
 //ball speed on axis
 let xSpeed = 5;
@@ -91,7 +101,8 @@ function preload(){
             {id:"inMenu", src:"gfx/sound/inMenu.mp3"},
             {id:"inGame", src:"gfx/sound/inGame.mp3"},
             {id:"audioButton", src:"gfx/img/audio_button.png"},
-            {id:"restart", src:"gfx/img/restart_button.png"}
+            {id:"restart", src:"gfx/img/restart_button.png"},
+            {id:"timesup", src:"gfx/img/timesUp.png"}
     ]);
 
     queue.addEventListener('progress', progress);
@@ -119,7 +130,7 @@ function inGamePause(){
 
 //restarts the game while playing it. Only while playing it.
 function restartGame(){
-    stage.removeChild(player, ball, cpu, playerScore, cpuScore, restart_game, toggleAudio_game);
+    stage.removeChild(player, ball, cpu, playerScore, cpuScore, timer, time, restart_game, toggleAudio_game);
     createjs.Sound.stop();
     reset();
     startGame();
@@ -237,6 +248,14 @@ function startGame(){
      cpuScore.x = 262;
      cpuScore.y = 20;
 
+     timer = new createjs.Text('Timer: ', ' 30px VT323', '#fff');
+     timer.x = 70;
+     timer.y = 20;
+
+     time = new createjs.Text('60',  ' 30px VT323', '#fff');
+     time.x = 150;
+     time.y = 20;
+
     //audio stop/start button
     toggleAudio_game = new createjs.Bitmap(queue.getResult('audioButton'));
      toggleAudio_game.x = 210;
@@ -255,7 +274,7 @@ function startGame(){
         restartGame();
       });
        
-    stage.addChild(toggleAudio_game, playerScore, cpuScore, player, cpu, ball, restart_game );
+    stage.addChild(toggleAudio_game, playerScore, cpuScore, timer, time, player, cpu, ball, restart_game );
 }
     
 function movePaddle(){
@@ -391,8 +410,10 @@ function gameStatus() {
   if(cpuScore.text == '3'){
    alert('lose');
    
+   
    let loseSound = createjs.Sound.play("loseScreen");
    loseSound.volume = 0.1;
+  //  createjs.Touch.disable(stage);
   }
 } 
 
