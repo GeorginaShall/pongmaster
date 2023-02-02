@@ -1,0 +1,17 @@
+canvas {
+    background-image: url("../gfx/img/space.png");
+    background-size: cover; 
+    animation: scroll 25s infinite linear;
+}
+
+@keyframes scroll {
+    to {
+        background-position-x: 400px;
+    }
+}
+  
+a.button {
+  text-decoration: none;
+  color: initial;
+  cursor: pointer;
+}
