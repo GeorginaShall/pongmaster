@@ -308,10 +308,6 @@ function moveBall(){
   ball.x = ball.x + xSpeed;
   ball.y = ball.y + ySpeed;
 
-  if (!timer_on) {
-    timer_on = 1;
-    timedCount();
-  } 
 
 }
 
@@ -403,6 +399,7 @@ function hitTest() {
 function alert(e){     
     if(e == 'win') {
         settings.gameRunning=false;
+        timer_on = 0;
         createjs.Sound.stop();
         win = new createjs.Bitmap(queue.getResult('win'));
         win.x = 15;
@@ -413,6 +410,7 @@ function alert(e){
         
     }else if(e == 'lose'){
         settings.gameRunning=false;
+        timer_on = 0;
         createjs.Sound.stop();
         lose = new createjs.Bitmap(queue.getResult('lose'));
         lose.x = 15;
@@ -425,13 +423,14 @@ function alert(e){
 
     else if(e == 'timesup'){
       settings.gameRunning=false;
+      timer_on = 0;
       createjs.Sound.stop();
       timesup = new createjs.Bitmap(queue.getResult('timesup'));
       timesup.x = 0;
       timesup.y = -150;        
       Tween.get(timesup).to({y: 10}, 500);      
 
-     
+      stage.addChild(timesup);
 
       if(playerScore.text > cpuScore.text) {
         
@@ -450,16 +449,23 @@ function alert(e){
         stage.addChild(timesup, lose);        
     }
 
-
+ stage.removeChild(toggleAudio_game, restart_game);
       
   }
       
-        stage.removeChild(toggleAudio_game, restart_game);
+       
          
 }
 
 //score tracking to know if we should pop a win screen, a lose one or nothing 
 function gameStatus() {
+
+  
+  if (!timer_on) {
+    timer_on = 1;
+    timedCount();
+  } 
+
   if(playerScore.text == '3'){
    alert('win');
    
