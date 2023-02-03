@@ -458,7 +458,7 @@ console.log('time up')
         stage.addChild(timesup, lose);        
     }
 
- stage.removeChild(toggleAudio_game, restart_game);
+ stage.removeChild(toggleAudio_game, restart_game, timer, time);
       
   }
       
