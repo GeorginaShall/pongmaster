@@ -224,7 +224,7 @@ function loaded() {
       // inMenuPause();
        startGame();
       });
-    });
+    }); 
 
     createjs.Ticker.framerate=30;
     createjs.Ticker.addEventListener("tick", tock);    
