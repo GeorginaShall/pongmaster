@@ -44,7 +44,7 @@ let ySpeed = 5;
 let cpuSpeed = 4.5; 
 
 //menu and game music
-let inMenuSound, inGameSound, toggleAudio_game, toggleAudio_menu;
+//let inMenuSound, inGameSound, toggleAudio_game, toggleAudio_menu;
 
 //restart button 
 let restart_game
@@ -62,22 +62,22 @@ function preload(){
     pText.y=stage.canvas.height/2;
     stage.addChild(pText);
 
-    function FontLoader(loadItem, preferXHR) {
-		this.AbstractLoader_constructor(loadItem, preferXHR, loadItem.type);
-		this._faces = {};
-		this._watched = [];
-		this._count = 0;
-		this._watchInterval = null;
-		this._loadTimeout = null;
+  //   function FontLoader(loadItem, preferXHR) {
+	// 	this.AbstractLoader_constructor(loadItem, preferXHR, loadItem.type);
+	// 	this._faces = {};
+	// 	this._watched = [];
+	// 	this._count = 0;
+	// 	this._watchInterval = null;
+	// 	this._loadTimeout = null;
 		
-		this._injectCSS = (loadItem.injectCSS === undefined) ? true : loadItem.injectCSS;
+	// 	this._injectCSS = (loadItem.injectCSS === undefined) ? true : loadItem.injectCSS;
  
-		this.dispatchEvent("initialize");
-	}
-	var p = createjs.extend(FontLoader, createjs.AbstractLoader);
-    FontLoader.canLoadItem = function (item) {
-        return item.type == createjs.Types.FONT || item.type == createjs.Types.FONTCSS;
-    };
+	// 	this.dispatchEvent("initialize");
+	// }
+	// var p = createjs.extend(FontLoader, createjs.AbstractLoader);
+  //   FontLoader.canLoadItem = function (item) {
+  //       return item.type == createjs.Types.FONT || item.type == createjs.Types.FONTCSS;
+  //   };
     
     queue = new createjs.LoadQueue(true);
     queue.installPlugin(createjs.Sound);
@@ -87,19 +87,19 @@ function preload(){
 			{id:"ball", src:"gfx/img/ball.png"},
 			{id:"win", src:"gfx/img/win.png"},
             {id:"lose", src:"gfx/img/lose.png"},
-            {id:"start", src:"gfx/img/start.png"},
-            {id:"title", src:"gfx/img/title.png"},  
+            //{id:"start", src:"gfx/img/start.png"},
+            //{id:"title", src:"gfx/img/title.png"},  
             {id:"start_game", src:"gfx/img/instructions_start.png"}, 
             {id:"howTo", src:"gfx/img/howTo.png"},              
-            {id:"instruction", src:"gfx/img/howToPlay.png"},          
+           // {id:"instruction", src:"gfx/img/howToPlay.png"},          
 			{id:"playerScore", src:"gfx/sound/playerScore.mp3"},
             {id:"enemyScore", src:"gfx/sound/enemyScore.mp3"},
             {id:"winScreen", src:"gfx/sound/win.mp3"},
             {id:"loseScreen", src:"gfx/sound/lose.mp3"},
 			{id:"hitPaddle", src:"gfx/sound/hitPaddle.mp3"},
             {id:"wall", src:"gfx/sound/hit.mp3"},
-            {id:"inMenu", src:"gfx/sound/inMenu.mp3"},
-            {id:"inGame", src:"gfx/sound/inGame.mp3"},
+           // {id:"inMenu", src:"gfx/sound/inMenu.mp3"},
+           // {id:"inGame", src:"gfx/sound/inGame.mp3"},
             {id:"audioButton", src:"gfx/img/audio_button.png"},
             {id:"restart", src:"gfx/img/restart_button.png"},
             {id:"timesup", src:"gfx/img/timesUp.png"}
@@ -119,18 +119,22 @@ function progress(e){
 }
 
 //pausing the menu audio
-function inMenuPause(){
-    inMenuSound.paused ? inMenuSound.paused = false : inMenuSound.paused = true;
-}
+// function inMenuPause(){
+//     inMenuSound.paused ? inMenuSound.paused = false : inMenuSound.paused = true;
+// }
 
 //pausing the game audio
-function inGamePause(){
-    inGameSound.paused ? inGameSound.paused = false : inGameSound.paused = true;
-}
+// function inGamePause(){
+//     inGameSound.paused ? inGameSound.paused = false : inGameSound.paused = true;
+// }
 
 //restarts the game while playing it. Only while playing it.
+
+
+
+//rmv, toggleAudio_game
 function restartGame(){
-    stage.removeChild(player, ball, cpu, playerScore, cpuScore, timer, time, restart_game, toggleAudio_game);
+    stage.removeChild(player, ball, cpu, playerScore, cpuScore, timer, time, restart_game);
     createjs.Sound.stop();
     reset();
     startGame();
@@ -140,49 +144,67 @@ function restartGame(){
 function loaded() {
     stage.removeChild(pText);
     
-    inMenuSound = createjs.Sound.play("inMenu", {loop:-1});
-     inMenuSound.volume = 0.05;
+    // inMenuSound = createjs.Sound.play("inMenu", {loop:-1});
+    //  inMenuSound.volume = 0.05;
      
     //title
-    let title = new createjs.Bitmap(queue.getResult('title'));
-     title.x = 5;
-     title.y = -10;
-    
+    // let title = new createjs.Bitmap(queue.getResult('title'));
+    //  title.x = 5;
+    //  title.y = -10;
 
+     let title = new createjs.Text('PONG', ' 80px VT323', '#fff');
+     title.x = 180;
+     title.y = 20;
+    
+     let title2 = new createjs.Text('Legends Never Die', ' 20px VT323', '#fff');
+     title2.x = 175;
+     title2.y = 90;
     //start button
-    let button = new createjs.Bitmap(queue.getResult('start'));
-     button.x = 180;
-     button.y = 140;
+
+    button = new createjs.Text('Start', ' 30px VT323', '#fff');
+    button.x = 215;
+    button.y = 140;
+
+    // let button = new createjs.Bitmap(queue.getResult('start'));
+    //  button.x = 180;
+    //  button.y = 140;
     
     //instruction button
-    let instruction = new createjs.Bitmap(queue.getResult('instruction'));
+    // let instruction = new createjs.Bitmap(queue.getResult('instruction'));
+    //  instruction.x = 180;
+    //  instruction.y = 200;
+    
+     let instruction = new createjs.Text('How To Play', ' 30px VT323', '#fff');
      instruction.x = 180;
      instruction.y = 200;
-    
+
      //audio stop/start button
-    toggleAudio_menu = new createjs.Bitmap(queue.getResult('audioButton'));
-     toggleAudio_menu.x = 440;
-     toggleAudio_menu.y = 280;
+    // toggleAudio_menu = new createjs.Bitmap(queue.getResult('audioButton'));
+    //  toggleAudio_menu.x = 440;
+    //  toggleAudio_menu.y = 280;
+
+
+    //add , toggleAudio_menu
 
       
-    stage.addChild(button, instruction, title, toggleAudio_menu);
+    stage.addChild(button, instruction, title,title2);
     
     //click to stop or start the audio
-    toggleAudio_menu.addEventListener('click', function(e){
-      inMenuPause();
-    });
+    // toggleAudio_menu.addEventListener('click', function(e){
+    //   inMenuPause();
+    // });
 
-
+//rmv , toggleAudio_menu
     //click on the start game button => start the game
     button.addEventListener('click', function(e){
-     stage.removeChild(e.target, instruction, title, toggleAudio_menu);
-      inMenuPause();
+     stage.removeChild(e.target, instruction, title,title2);
+    //  inMenuPause();
       startGame();
     });
 
     //click on the instruction button => go to the instruction screen
     instruction.addEventListener('click', function(e){
-     stage.removeChild(e.target, button, instruction, title)
+     stage.removeChild(e.target, button, instruction, title, title2)
 
       let instruction_pannel = new createjs.Bitmap(queue.getResult('howTo'));
        instruction_pannel.x = -7;
@@ -194,10 +216,12 @@ function loaded() {
          
      stage.addChild(start_game, instruction_pannel )  
         
+
+     //rmv , toggleAudio_menu
     //new button on the instruction screen, click it => starts the game
      start_game.addEventListener('click', function(e){  
-      stage.removeChild(start_game, title, instruction_pannel, toggleAudio_menu)
-       inMenuPause();
+      stage.removeChild(start_game, title, title2, instruction_pannel)
+      // inMenuPause();
        startGame();
       });
     });
@@ -223,8 +247,8 @@ function startGame(){
 
     settings.gameRunning=true;
 
-    inGameSound = createjs.Sound.play("inGame", {loop:-1});
-    inGameSound.volume = 0.02;
+    // inGameSound = createjs.Sound.play("inGame", {loop:-1});
+    // inGameSound.volume = 0.02;
       
     window.addEventListener('keyup', fingerLifted);
     window.addEventListener('keydown', fingerDown);
@@ -258,13 +282,13 @@ function startGame(){
      time.y = 20;
 
     //audio stop/start button
-    toggleAudio_game = new createjs.Bitmap(queue.getResult('audioButton'));
-     toggleAudio_game.x = 210;
-     toggleAudio_game.y = 290;
+    // toggleAudio_game = new createjs.Bitmap(queue.getResult('audioButton'));
+    //  toggleAudio_game.x = 210;
+    //  toggleAudio_game.y = 290;
 
-    toggleAudio_game.addEventListener('click', function(e){
-        inGamePause();
-      });
+    // toggleAudio_game.addEventListener('click', function(e){
+    //     inGamePause();
+    //   });
 
     //restart button
     restart_game = new createjs.Bitmap(queue.getResult('restart'));
@@ -275,7 +299,10 @@ function startGame(){
         restartGame();
       });
        
-    stage.addChild(toggleAudio_game, playerScore, cpuScore, timer, time, player, cpu, ball, restart_game );
+
+
+      //add toggleAudio_game, 
+    stage.addChild(playerScore, cpuScore, timer, time, player, cpu, ball, restart_game );
 }
     
 function movePaddle(){
@@ -413,7 +440,9 @@ function alert(e){
         win.y = -150;
         Tween.get(win).to({y: 10}, 500);
         stage.addChild(win);
-        stage.removeChild(toggleAudio_game, restart_game);
+
+        //rmv toggleAudio_game,
+        stage.removeChild( restart_game);
         
     }else if(e == 'lose'){
         settings.gameRunning=false;
@@ -424,7 +453,9 @@ function alert(e){
         lose.y = -150;        
         Tween.get(lose).to({y: 10}, 500);      
         stage.addChild(lose);
-        stage.removeChild(toggleAudio_game, restart_game);
+
+             //rmv toggleAudio_game,
+        stage.removeChild(restart_game);
         
     }
 
@@ -457,8 +488,8 @@ console.log('time up')
         Tween.get(lose).to({y: 70}, 500);      
         stage.addChild(timesup, lose);        
     }
-
- stage.removeChild(toggleAudio_game, restart_game, timer, time);
+     //rmv toggleAudio_game,
+ stage.removeChild(restart_game, timer, time);
 
  console.log('run stop');
  stage.on("dblclick", function(evt) {
