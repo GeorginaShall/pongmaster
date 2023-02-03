@@ -459,12 +459,17 @@ console.log('time up')
     }
 
  stage.removeChild(toggleAudio_game, restart_game, timer, time);
+
+ console.log('run stop');
+ stage.on("dblclick", function(evt) {
+   location.reload();
+   console.log('dblclick');
       
-  }
+  });
       
        
          
-}
+}}
 
 //score tracking to know if we should pop a win screen, a lose one or nothing 
 function gameStatus() {
