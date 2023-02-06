@@ -47,7 +47,7 @@ let cpuSpeed = 4.5;
 //let inMenuSound, inGameSound, toggleAudio_game, toggleAudio_menu;
 
 //restart button 
-let restart_game
+let restart_game;
 
 //preloader
 function preload(){
@@ -55,12 +55,12 @@ function preload(){
     stage.mouseEventsEnabled = true;
     createjs.Touch.enable(stage);
 
-    pText = new createjs.Text("Loading", "30px VT323", "#FFF");
-    pText.textBaseline="middle";
-    pText.textAlign="center";
-    pText.x=stage.canvas.width/2;
-    pText.y=stage.canvas.height/2;
-    stage.addChild(pText);
+    // pText = new createjs.Text("Loading", "30px VT323", "#FFF");
+    // pText.textBaseline="middle";
+    // pText.textAlign="center";
+    // pText.x=stage.canvas.width/2;
+    // pText.y=stage.canvas.height/2;
+    // stage.addChild(pText);
 
   //   function FontLoader(loadItem, preferXHR) {
 	// 	this.AbstractLoader_constructor(loadItem, preferXHR, loadItem.type);
@@ -82,15 +82,15 @@ function preload(){
     queue = new createjs.LoadQueue(true);
     queue.installPlugin(createjs.Sound);
     queue.loadManifest([
-			{id:"cpuPaddle", src:"gfx/img/paddle.png"},
-			{id:"playerPaddle", src:"gfx/img/paddle.png"},
+			{id:"cpuPaddle", src:"gfx/img/paddlenew.png"},
+			{id:"playerPaddle", src:"gfx/img/paddlenew.png"},
 			{id:"ball", src:"gfx/img/ball.png"},
 			{id:"win", src:"gfx/img/win.png"},
             {id:"lose", src:"gfx/img/lose.png"},
             //{id:"start", src:"gfx/img/start.png"},
             //{id:"title", src:"gfx/img/title.png"},  
             {id:"start_game", src:"gfx/img/instructions_start.png"}, 
-            {id:"howTo", src:"gfx/img/howTo.png"},              
+            //{id:"howTo", src:"gfx/img/howTo.png"},              
            // {id:"instruction", src:"gfx/img/howToPlay.png"},          
 			{id:"playerScore", src:"gfx/sound/playerScore.mp3"},
             {id:"enemyScore", src:"gfx/sound/enemyScore.mp3"},
@@ -105,18 +105,18 @@ function preload(){
             {id:"timesup", src:"gfx/img/timesUp.png"}
     ]);
 
-    queue.addEventListener('progress', progress);
-    queue.addEventListener('complete', loaded);
+  //  queue.addEventListener('progress', progress);
+  queue.addEventListener('complete', loaded);
 
 } 
 
 //visual loading progress
-function progress(e){
-    let percent = Math.round(e.progress*100);
-    pText.text = "Loading: "+percent+"%";
+// function progress(e){
+//     let percent = Math.round(e.progress*100);
+//     pText.text = "Loading: "+percent+"%";
     
-    stage.update();
-}
+//     stage.update();
+// }
 
 //pausing the menu audio
 // function inMenuPause(){
@@ -153,16 +153,19 @@ function loaded() {
     //  title.y = -10;
 
      let title = new createjs.Text('PONG', ' 80px VT323', '#fff');
-     title.x = 180;
+     title.x=stage.canvas.width/2;
+     title.textAlign="center";
      title.y = 20;
     
      let title2 = new createjs.Text('Legends Never Die', ' 20px VT323', '#fff');
-     title2.x = 175;
+     title2.x=stage.canvas.width/2;
+     title2.textAlign="center";
      title2.y = 90;
     //start button
 
     button = new createjs.Text('Start', ' 30px VT323', '#fff');
-    button.x = 215;
+    button.x=stage.canvas.width/2;
+    button.textAlign="center";
     button.y = 140;
 
     // let button = new createjs.Bitmap(queue.getResult('start'));
@@ -175,7 +178,8 @@ function loaded() {
     //  instruction.y = 200;
     
      let instruction = new createjs.Text('How To Play', ' 30px VT323', '#fff');
-     instruction.x = 180;
+     instruction.textAlign="center";
+     instruction.x=stage.canvas.width/2;
      instruction.y = 200;
 
      //audio stop/start button
@@ -206,12 +210,20 @@ function loaded() {
     instruction.addEventListener('click', function(e){
      stage.removeChild(e.target, button, instruction, title, title2)
 
-      let instruction_pannel = new createjs.Bitmap(queue.getResult('howTo'));
-       instruction_pannel.x = -7;
-       instruction_pannel.y = -10;
+      let instruction_pannel = new createjs.Text('The game is simple! \n Move the paddle to prevent te ball from falling \n to your side. Instead, direct it to pass enemy paddle.\n Score 3 points and win!!', ' 20px VT323', '#fff');
+      //instruction_pannel.textBaseline="middle";
+      instruction_pannel.textAlign="center";
+      instruction_pannel.x=stage.canvas.width/2;
+      //instruction_pannel.y=stage.canvas.height/2;
 
-      let start_game = new createjs.Bitmap(queue.getResult('start_game'));
-       start_game.x = 180;
+      //instruction_pannel.x = -7;
+      instruction_pannel.y = 140;
+      stage.addChild(instruction_pannel);
+   
+      let start_game = new createjs.Text('Lets Start!', ' 30px VT323', '#fff');
+      start_game.textAlign="center";
+      start_game.x=stage.canvas.width/2;
+
        start_game.y = 265;
          
      stage.addChild(start_game, instruction_pannel )  
@@ -238,7 +250,7 @@ function startGame(){
   stage.mouseMoveOutside = true;
   stage.on("stagemousemove", function(evt) {
 
-    player.y=evt.stageY;
+    player.x=evt.stageX;
     //coordinates
     //  console.log("stageX/Y: "+evt.stageX+","+evt.stageY); // always in bounds
     //  console.log("rawX/Y: "+evt.rawX+","+evt.rawY); // could be < 0, or > width/height
@@ -254,32 +266,32 @@ function startGame(){
     window.addEventListener('keydown', fingerDown);
 
     player = new createjs.Bitmap(queue.getResult('playerPaddle'));
-     player.x = 2;
-     player.y = 160 - 37.5;
+     player.x = 240 - 15;//2;
+     player.y = 320 - 25; //230 - 25;//160 - 37.5;
 
     cpu = new createjs.Bitmap(queue.getResult('cpuPaddle'));
-     cpu.x = 480 - 25;
-     cpu.y = 160 - 37.5;
+     cpu.x = 240 - 15;//480 - 25;
+     cpu.y = 30;//160 - 37.5;
 
     ball = new createjs.Bitmap(queue.getResult('ball'));
-     ball.x = 240 - 15;
+     ball.x = 240 - 15;;
      ball.y = 160 - 15;
 
     playerScore = new createjs.Text('0', ' 30px VT323', '#fff');
      playerScore.x = 211;
-     playerScore.y = 20;
+     playerScore.y = 5;
      
     cpuScore = new createjs.Text('0', ' 30px VT323', '#fff');
      cpuScore.x = 262;
-     cpuScore.y = 20;
+     cpuScore.y = 5;
 
      timer = new createjs.Text('Timer: ', ' 30px VT323', '#fff');
-     timer.x = 70;
-     timer.y = 20;
+     timer.x = 50;
+     timer.y = 5;
 
-     time = new createjs.Text('10',  ' 30px VT323', '#fff');
-     time.x = 150;
-     time.y = 20;
+     time = new createjs.Text('30',  ' 30px VT323', '#fff');
+     time.x = 140;
+     time.y = 5;
 
     //audio stop/start button
     // toggleAudio_game = new createjs.Bitmap(queue.getResult('audioButton'));
@@ -292,8 +304,8 @@ function startGame(){
 
     //restart button
     restart_game = new createjs.Bitmap(queue.getResult('restart'));
-    restart_game.x = 260;
-    restart_game.y = 290;
+    restart_game.x = 420;
+    restart_game.y = 7;
 
     restart_game.addEventListener('click', function(e){
         restartGame();
@@ -307,18 +319,20 @@ function startGame(){
     
 function movePaddle(){
     if(keys.u){
-      player.y-=settings.speed;
+      player.x-=settings.speed;
     }
     if(keys.d){
-      player.y+=settings.speed;
+      player.x+=settings.speed;
     }
-    if(player.y >= 245) //stop the paddle from going out of canvas 
+    //if(player.y >= 245) //stop the paddle from going out of canvas 
+
+    if(player.x >= 405) //stop the paddle from going out of canvas 
     {
-      player.y = 245;
+      player.x = 405;
     }
-    if(player.y <= 0)
+    if(player.x <= 0)
     {
-      player.y = 0;
+      player.x = 0;
     }
 }
 
@@ -326,8 +340,12 @@ function movePaddle(){
 function reset(){
   ball.x = 240 - 15;
   ball.y = 160 - 15;
-  player.y = 160 - 37.5;
-  cpu.y = 160 - 37.5;    
+
+  cpu.x = 240 - 15;//480 - 25;
+  player.x = 240 - 15;//2;
+
+  //player.y = 160 - 37.5;
+  //cpu.y = 160 - 37.5;    
 }
 
 //ball movement 
@@ -340,19 +358,35 @@ function moveBall(){
 
 //when ball hits the wall
 function hitWall(){
- if((ball.y) < 0) { //top wall
-    ySpeed = -ySpeed; 
+//  if((ball.y) < 0) { //top wall
+//     ySpeed = -ySpeed; 
+    
+//  let wallHitSound = createjs.Sound.play("wall");
+//  wallHitSound.volume = 0.1;
+//  };
+
+//  if((ball.y + (30)) > 320) { //bottom wall
+//   ySpeed = -ySpeed; 
+    
+//  let wallHitSound = createjs.Sound.play("wall");
+//  wallHitSound.volume = 0.1;
+//   };
+
+  if((ball.x) < 0) { //left wall
+    xSpeed = -xSpeed; 
     
  let wallHitSound = createjs.Sound.play("wall");
  wallHitSound.volume = 0.1;
  };
 
- if((ball.y + (30)) > 320) { //bottom wall
-  ySpeed = -ySpeed; 
+ if((ball.x + (30)) > 480) { //right wall
+  xSpeed = -xSpeed; 
     
  let wallHitSound = createjs.Sound.play("wall");
  wallHitSound.volume = 0.1;
   };
+
+
 }
 
 function timedCount() {
@@ -382,8 +416,27 @@ function timedCount() {
 }
 
 function trackScore(){
-  if((ball.x) < 0){
-    xSpeed = -xSpeed;
+  // if((ball.x) < 0){
+  //   xSpeed = -xSpeed;
+  //   cpuScore.text = parseInt(cpuScore.text + 1);
+  //   settings.speed--;
+    
+  //   reset();
+  //   let enemyScoreSound = createjs.Sound.play("enemyScore");
+  //   enemyScoreSound.volume = 0.1;
+  // }
+
+  // if((ball.x + (30)) > 480){
+  //   xSpeed = -xSpeed;
+  //   playerScore.text = parseInt(playerScore.text + 1);
+    
+  //   reset();
+  //   let playerScoreSound = createjs.Sound.play("playerScore");
+  //   playerScoreSound.volume = 0.1;
+  // }
+
+ if((ball.y - (30)) > 260){
+    ySpeed = -ySpeed;
     cpuScore.text = parseInt(cpuScore.text + 1);
     settings.speed--;
     
@@ -392,8 +445,8 @@ function trackScore(){
     enemyScoreSound.volume = 0.1;
   }
 
-  if((ball.x + (30)) > 480){
-    xSpeed = -xSpeed;
+   if((ball.y) < 20){
+    ySpeed = -ySpeed;
     playerScore.text = parseInt(playerScore.text + 1);
     
     reset();
@@ -403,30 +456,67 @@ function trackScore(){
 }
 
 function moveCpu() {
-  //Cpu Movement / computer AI 
-    if((cpu.y+32) < (ball.y-14)){
-      cpu.y = cpu.y + cpuSpeed;
-   }else if((cpu.y+32) > (ball.y+14)){
-      cpu.y = cpu.y - cpuSpeed;
-  }
+  // //Cpu Movement / computer AI 
+  //   if((cpu.y+32) < (ball.y-14)){
+  //     cpu.y = cpu.y + cpuSpeed;
+  //  }else if((cpu.y+32) > (ball.y+14)){
+  //     cpu.y = cpu.y - cpuSpeed;
+  // }
+
+   //Cpu Movement / computer AI 
+   if((cpu.x+32) < (ball.x-14)){
+    cpu.x = cpu.x + cpuSpeed;
+ }
+ 
+ 
+ else if((cpu.x+32) > (ball.x+14)){
+    cpu.x = cpu.x - cpuSpeed;
+}
 }
 
 function hitTest() {
-    if(ball.x + 30 > cpu.x && ball.x + 30 < cpu.x + 22 && ball.y >= cpu.y && ball.y < cpu.y + 75){
-        xSpeed *= -1;
+    // if(ball.x + 30 > cpu.x && ball.x + 30 < cpu.x + 22 && ball.y >= cpu.y && ball.y < cpu.y + 75){
+    //     xSpeed *= -1;
     
-    let paddleHitSound = createjs.Sound.play("hitPaddle");
-    paddleHitSound.volume = 0.1;
+    // let paddleHitSound = createjs.Sound.play("hitPaddle");
+    // paddleHitSound.volume = 0.1;
         
-    }
-    if(ball.x <= player.x + 22 && ball.x > player.x && ball.y >= player.y && ball.y < player.y + 75){       
-        xSpeed *= -1;
+    // }
+    // if(ball.x <= player.x + 22 && ball.x > player.x && ball.y >= player.y && ball.y < player.y + 75){       
+    //     xSpeed *= -1;
     
-    let paddleHitSound = createjs.Sound.play("hitPaddle");
-    paddleHitSound.volume = 0.1;
+    // let paddleHitSound = createjs.Sound.play("hitPaddle");
+    // paddleHitSound.volume = 0.1;
         
         
-    }
+    // }
+
+
+    if(ball.y + 30 -22 > cpu.y 
+      && ball.y + 30 -22< cpu.y + 22 
+      && ball.x >= cpu.x 
+      && ball.x < cpu.x + 75)
+      
+      {
+      ySpeed *= -1;
+  
+  let paddleHitSound = createjs.Sound.play("hitPaddle");
+  paddleHitSound.volume = 0.1;
+      
+  }
+  if(ball.y +22 <= player.y + 22
+    && ball.y +22 > player.y 
+    && ball.x >= player.x 
+    && ball.x < player.x + 75)
+    
+    {       
+      ySpeed *= -1;
+  
+  let paddleHitSound = createjs.Sound.play("hitPaddle");
+  paddleHitSound.volume = 0.1;
+      
+      
+  }
 }
 
 //dealing with the win/lose pop-ups
@@ -438,6 +528,20 @@ function alert(e){
         win = new createjs.Bitmap(queue.getResult('win'));
         win.x = 15;
         win.y = -150;
+
+
+        // win = new createjs.Text('Congratulations! \n\n\n You Won!', ' 30px VT323', '#fff');
+        // win.textAlign="center";
+        // win..textBaseline="middle";
+        //   win.y=stage.canvas.height/2;
+        //   win.x=stage.canvas.width/2;
+
+        
+        // press_space = new createjs.Text('Press Space to Restart', ' 20px VT323', '#fff');
+        // press_space.textAlign="center";
+        // win.x=stage.canvas.width/2;
+        // win.y = 200;
+
         Tween.get(win).to({y: 10}, 500);
         stage.addChild(win);
 
