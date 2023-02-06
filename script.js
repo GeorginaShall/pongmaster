@@ -47,7 +47,7 @@ let cpuSpeed = 4.5;
 //let inMenuSound, inGameSound, toggleAudio_game, toggleAudio_menu;
 
 //restart button 
-let restart_game;
+//let restart_game;
 
 //preloader
 function preload(){
@@ -132,13 +132,13 @@ function preload(){
 
 
 
-//rmv, toggleAudio_game
-function restartGame(){
-    stage.removeChild(player, ball, cpu, playerScore, cpuScore, timer, time, restart_game);
-    createjs.Sound.stop();
-    reset();
-    startGame();
-}
+//rmv, toggleAudio_game, restart_game
+// function restartGame(){
+//     stage.removeChild(player, ball, cpu, playerScore, cpuScore, timer, time);
+//     createjs.Sound.stop();
+//     reset();
+//     startGame();
+// }
 
 //loading completed, do this
 function loaded() {
@@ -177,10 +177,10 @@ function loaded() {
     //  instruction.x = 180;
     //  instruction.y = 200;
     
-     let instruction = new createjs.Text('How To Play', ' 30px VT323', '#fff');
-     instruction.textAlign="center";
-     instruction.x=stage.canvas.width/2;
-     instruction.y = 200;
+    //  let instruction = new createjs.Text('How To Play', ' 30px VT323', '#fff');
+    //  instruction.textAlign="center";
+    //  instruction.x=stage.canvas.width/2;
+    //  instruction.y = 200;
 
      //audio stop/start button
     // toggleAudio_menu = new createjs.Bitmap(queue.getResult('audioButton'));
@@ -188,55 +188,55 @@ function loaded() {
     //  toggleAudio_menu.y = 280;
 
 
-    //add , toggleAudio_menu
+    //add , toggleAudio_menu, instruction
 
       
-    stage.addChild(button, instruction, title,title2);
+    stage.addChild(button, title,title2);
     
     //click to stop or start the audio
     // toggleAudio_menu.addEventListener('click', function(e){
     //   inMenuPause();
     // });
 
-//rmv , toggleAudio_menu
+//rmv , toggleAudio_menu instruction,
     //click on the start game button => start the game
     button.addEventListener('click', function(e){
-     stage.removeChild(e.target, instruction, title,title2);
+     stage.removeChild(e.target,  title,title2);
     //  inMenuPause();
       startGame();
     });
 
-    //click on the instruction button => go to the instruction screen
-    instruction.addEventListener('click', function(e){
-     stage.removeChild(e.target, button, instruction, title, title2)
+    // //click on the instruction button => go to the instruction screen
+    // instruction.addEventListener('click', function(e){
+    //  stage.removeChild(e.target, button, instruction, title, title2)
 
-      let instruction_pannel = new createjs.Text('The game is simple! \n Move the paddle to prevent te ball from falling \n to your side. Instead, direct it to pass enemy paddle.\n Score 3 points and win!!', ' 20px VT323', '#fff');
-      //instruction_pannel.textBaseline="middle";
-      instruction_pannel.textAlign="center";
-      instruction_pannel.x=stage.canvas.width/2;
-      //instruction_pannel.y=stage.canvas.height/2;
+    //   let instruction_pannel = new createjs.Text('The game is simple! \n Move the paddle to prevent te ball from falling \n to your side. Instead, direct it to pass enemy paddle.\n Score 3 points and win!!', ' 20px VT323', '#fff');
+    //   //instruction_pannel.textBaseline="middle";
+    //   instruction_pannel.textAlign="center";
+    //   instruction_pannel.x=stage.canvas.width/2;
+    //   //instruction_pannel.y=stage.canvas.height/2;
 
-      //instruction_pannel.x = -7;
-      instruction_pannel.y = 140;
-      stage.addChild(instruction_pannel);
+    //   //instruction_pannel.x = -7;
+    //   instruction_pannel.y = 140;
+    //   stage.addChild(instruction_pannel);
    
-      let start_game = new createjs.Text('Lets Start!', ' 30px VT323', '#fff');
-      start_game.textAlign="center";
-      start_game.x=stage.canvas.width/2;
+    //   let start_game = new createjs.Text('Lets Start!', ' 30px VT323', '#fff');
+    //   start_game.textAlign="center";
+    //   start_game.x=stage.canvas.width/2;
 
-       start_game.y = 265;
+    //    start_game.y = 265;
          
-     stage.addChild(start_game, instruction_pannel )  
+    //  stage.addChild(start_game, instruction_pannel )  
         
 
-     //rmv , toggleAudio_menu
-    //new button on the instruction screen, click it => starts the game
-     start_game.addEventListener('click', function(e){  
-      stage.removeChild(start_game, title, title2, instruction_pannel)
-      // inMenuPause();
-       startGame();
-      });
-    }); 
+    //  //rmv , toggleAudio_menu
+    // //new button on the instruction screen, click it => starts the game
+    //  start_game.addEventListener('click', function(e){  
+    //   stage.removeChild(start_game, title, title2, instruction_pannel)
+    //   // inMenuPause();
+    //    startGame();
+    //   });
+    // }); 
 
     createjs.Ticker.framerate=30;
     createjs.Ticker.addEventListener("tick", tock);    
@@ -289,7 +289,7 @@ function startGame(){
      timer.x = 50;
      timer.y = 5;
 
-     time = new createjs.Text('30',  ' 30px VT323', '#fff');
+     time = new createjs.Text('60',  ' 30px VT323', '#fff');
      time.x = 140;
      time.y = 5;
 
@@ -303,18 +303,18 @@ function startGame(){
     //   });
 
     //restart button
-    restart_game = new createjs.Bitmap(queue.getResult('restart'));
-    restart_game.x = 420;
-    restart_game.y = 7;
+    // restart_game = new createjs.Bitmap(queue.getResult('restart'));
+    // restart_game.x = 420;
+    // restart_game.y = 7;
 
-    restart_game.addEventListener('click', function(e){
-        restartGame();
-      });
+    // restart_game.addEventListener('click', function(e){
+    //     restartGame();
+    //   });
        
 
 
-      //add toggleAudio_game, 
-    stage.addChild(playerScore, cpuScore, timer, time, player, cpu, ball, restart_game );
+      //add toggleAudio_game, , restart_game
+    stage.addChild(playerScore, cpuScore, timer, time, player, cpu, ball );
 }
     
 function movePaddle(){
@@ -546,7 +546,7 @@ function alert(e){
         stage.addChild(win);
 
         //rmv toggleAudio_game,
-        stage.removeChild( restart_game);
+       // stage.removeChild( restart_game);
         
     }else if(e == 'lose'){
         settings.gameRunning=false;
@@ -559,7 +559,7 @@ function alert(e){
         stage.addChild(lose);
 
              //rmv toggleAudio_game,
-        stage.removeChild(restart_game);
+        //stage.removeChild(restart_game);
         
     }
 
@@ -570,30 +570,31 @@ function alert(e){
       timesup = new createjs.Bitmap(queue.getResult('timesup'));
       timesup.x = 0;
       timesup.y = -150;        
-      Tween.get(timesup).to({y: 10}, 500);      
+      Tween.get(timesup).to({y: 10}, 500);  
+      stage.addChild(timesup);    
 console.log('time up')
 
 
-      if(playerScore.text > cpuScore.text) {
-        console.log('time up win')
+    //   if(playerScore.text > cpuScore.text) {
+    //     console.log('time up win')
 
-        win = new createjs.Bitmap(queue.getResult('win'));
-        win.x = 15;
-        win.y = -150;
-        Tween.get(win).to({y: 70}, 500);
-        stage.addChild(timesup, win);
+    //     win = new createjs.Bitmap(queue.getResult('win'));
+    //     win.x = 15;
+    //     win.y = -150;
+    //     Tween.get(win).to({y: 70}, 500);
+    //     stage.addChild(timesup, win);
     
-    }else {
-      console.log('time up lose')
+    // }else {
+    //   console.log('time up lose')
 
-        lose = new createjs.Bitmap(queue.getResult('lose'));
-        lose.x = 15;
-        lose.y = -150;        
-        Tween.get(lose).to({y: 70}, 500);      
-        stage.addChild(timesup, lose);        
-    }
-     //rmv toggleAudio_game,
- stage.removeChild(restart_game, timer, time);
+    //     lose = new createjs.Bitmap(queue.getResult('lose'));
+    //     lose.x = 15;
+    //     lose.y = -150;        
+    //     Tween.get(lose).to({y: 70}, 500);      
+    //     stage.addChild(timesup, lose);        
+    // }
+     //rmv toggleAudio_game,restart_game,
+ stage.removeChild( timer, time);
 
  console.log('run stop');
  stage.on("dblclick", function(evt) {
