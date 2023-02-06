@@ -166,7 +166,10 @@ function loaded() {
     button = new createjs.Text('Start', ' 30px VT323', '#fff');
     button.x=stage.canvas.width/2;
     button.textAlign="center";
-    button.y = 140;
+    button.textBaseline="middle";
+    button.y =stage.canvas.height/1.7;
+
+
 
     // let button = new createjs.Bitmap(queue.getResult('start'));
     //  button.x = 180;
