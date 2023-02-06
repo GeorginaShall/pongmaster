@@ -50,12 +50,21 @@ let cpuSpeed = 4.5;
 //let restart_game;
 
 //preloader
+
+// function resiize(){
+//   var scale = newWidth/myCanvas.width;
+// myCanvas.width = newWidth;
+// myStage.scaleX = myStage.scaleY = scale;
+// myStage.update(); // draw at the new size.
+// }
+
+
 function preload(){
     stage = new createjs.Stage("gameArea");
     stage.mouseEventsEnabled = true;
     createjs.Touch.enable(stage);
 
-    // pText = new createjs.Text("Loading", "30px VT323", "#FFF");
+    // pText = new createjs.Text("Loading", "4rem Arial", "#FFF");
     // pText.textBaseline="middle";
     // pText.textAlign="center";
     // pText.x=stage.canvas.width/2;
@@ -152,20 +161,20 @@ function loaded() {
     //  title.x = 5;
     //  title.y = -10;
 
-     let title = new createjs.Text('PONG', ' 80px VT323', '#fff');
+     let title = new createjs.Text('PONG', ' 5rem Arial', '#fff');
      title.x=stage.canvas.width/2;
      title.textAlign="center";
      title.y = 20;
     
-     let title2 = new createjs.Text('Legends Never Die', ' 20px VT323', '#fff');
+     let title2 = new createjs.Text('Legends Never Die', ' 2rem Arial', '#fff');
      title2.x=stage.canvas.width/2;
      title2.textAlign="center";
      title2.y = 90;
     //start button
 
-    button = new createjs.Text('Start', ' 30px VT323', '#fff');
+    button = new createjs.Text('Start', ' 4rem 	Arial', '#fff');
     button.x=stage.canvas.width/2;
-    button.textAlign="center";
+        button.textAlign="center";
     button.textBaseline="middle";
     button.y =stage.canvas.height/1.7;
 
@@ -180,7 +189,7 @@ function loaded() {
     //  instruction.x = 180;
     //  instruction.y = 200;
     
-    //  let instruction = new createjs.Text('How To Play', ' 30px VT323', '#fff');
+    //  let instruction = new createjs.Text('How To Play', ' 4rem Arial', '#fff');
     //  instruction.textAlign="center";
     //  instruction.x=stage.canvas.width/2;
     //  instruction.y = 200;
@@ -213,7 +222,7 @@ function loaded() {
     // instruction.addEventListener('click', function(e){
     //  stage.removeChild(e.target, button, instruction, title, title2)
 
-    //   let instruction_pannel = new createjs.Text('The game is simple! \n Move the paddle to prevent te ball from falling \n to your side. Instead, direct it to pass enemy paddle.\n Score 3 points and win!!', ' 20px VT323', '#fff');
+    //   let instruction_pannel = new createjs.Text('The game is simple! \n Move the paddle to prevent te ball from falling \n to your side. Instead, direct it to pass enemy paddle.\n Score 3 points and win!!', ' 2rem Arial', '#fff');
     //   //instruction_pannel.textBaseline="middle";
     //   instruction_pannel.textAlign="center";
     //   instruction_pannel.x=stage.canvas.width/2;
@@ -223,7 +232,7 @@ function loaded() {
     //   instruction_pannel.y = 140;
     //   stage.addChild(instruction_pannel);
    
-    //   let start_game = new createjs.Text('Lets Start!', ' 30px VT323', '#fff');
+    //   let start_game = new createjs.Text('Lets Start!', ' 4rem Arial', '#fff');
     //   start_game.textAlign="center";
     //   start_game.x=stage.canvas.width/2;
 
@@ -244,6 +253,8 @@ function loaded() {
     createjs.Ticker.framerate=30;
     createjs.Ticker.addEventListener("tick", tock);    
     }
+
+
 
 
     //game running
@@ -269,31 +280,35 @@ function startGame(){
     window.addEventListener('keydown', fingerDown);
 
     player = new createjs.Bitmap(queue.getResult('playerPaddle'));
+    player.scaleX=1.5;
+    player.scaleY=0.75;
      player.x = 240 - 15;//2;
      player.y = 320 - 25; //230 - 25;//160 - 37.5;
 
     cpu = new createjs.Bitmap(queue.getResult('cpuPaddle'));
+    cpu.scaleX=1.5;
+    cpu.scaleY=0.75;
      cpu.x = 240 - 15;//480 - 25;
-     cpu.y = 30;//160 - 37.5;
+     cpu.y = 35;//160 - 37.5;
 
     ball = new createjs.Bitmap(queue.getResult('ball'));
      ball.x = 240 - 15;;
      ball.y = 160 - 15;
 
-    playerScore = new createjs.Text('0', ' 30px VT323', '#fff');
+    playerScore = new createjs.Text('0', ' 2rem Arial', '#fff');
      playerScore.x = 211;
      playerScore.y = 5;
      
-    cpuScore = new createjs.Text('0', ' 30px VT323', '#fff');
+    cpuScore = new createjs.Text('0', ' 2rem Arial', '#fff');
      cpuScore.x = 262;
      cpuScore.y = 5;
 
-     timer = new createjs.Text('Timer: ', ' 30px VT323', '#fff');
+     timer = new createjs.Text('Timer: ', ' 2rem Arial', '#fff');
      timer.x = 50;
      timer.y = 5;
 
-     time = new createjs.Text('60',  ' 30px VT323', '#fff');
-     time.x = 140;
+     time = new createjs.Text('60',  ' 2rem Arial', '#fff');
+     time.x = 150;
      time.y = 5;
 
     //audio stop/start button
@@ -382,7 +397,7 @@ function hitWall(){
  wallHitSound.volume = 0.1;
  };
 
- if((ball.x + (30)) > 480) { //right wall
+ if((ball.x + (60)) > 480) { //right wall
   xSpeed = -xSpeed; 
     
  let wallHitSound = createjs.Sound.play("wall");
@@ -533,14 +548,14 @@ function alert(e){
         win.y = -150;
 
 
-        // win = new createjs.Text('Congratulations! \n\n\n You Won!', ' 30px VT323', '#fff');
+        // win = new createjs.Text('Congratulations! \n\n\n You Won!', ' 4rem Arial', '#fff');
         // win.textAlign="center";
         // win..textBaseline="middle";
         //   win.y=stage.canvas.height/2;
         //   win.x=stage.canvas.width/2;
 
         
-        // press_space = new createjs.Text('Press Space to Restart', ' 20px VT323', '#fff');
+        // press_space = new createjs.Text('Press Space to Restart', ' 2rem Arial', '#fff');
         // press_space.textAlign="center";
         // win.x=stage.canvas.width/2;
         // win.y = 200;

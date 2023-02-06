@@ -6,14 +6,16 @@
 
 canvas {
     background-color: black;
+    background-size: cover; 
+    background-position-x: 400px;
 }
 
-/* @keyframes scroll {
+@keyframes scroll {
     to {
         background-position-x: 400px;
     }
 }
-   */
+ 
 a.button {
   text-decoration: none;
   color: initial;
