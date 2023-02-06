@@ -8,12 +8,12 @@ canvas {
     background-color: black;
 }
 
-@keyframes scroll {
+/* @keyframes scroll {
     to {
         background-position-x: 400px;
     }
 }
-  
+   */
 a.button {
   text-decoration: none;
   color: initial;
