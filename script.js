@@ -547,11 +547,14 @@ function trackScore(){
 
  if((ball.y - (20)) > myheight){
 
-
+ySpeed=10;
+xSpeed=5;
+cpuSpeed=4;
 
     ySpeed = -ySpeed;
     cpuScore.text = parseInt(cpuScore.text + 1);
     settings.speed--;
+
     
     reset();
     let enemyScoreSound = createjs.Sound.play("enemyScore");
@@ -560,7 +563,9 @@ function trackScore(){
 
    if((ball.y) < 40){
 
-
+    ySpeed=10;
+    xSpeed=5;
+    cpuSpeed=4;
 
     ySpeed = -ySpeed;
     playerScore.text = parseInt(playerScore.text + 1);
