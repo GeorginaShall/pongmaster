@@ -64,6 +64,14 @@ function preload(){
     stage.mouseEventsEnabled = true;
     createjs.Touch.enable(stage);
 
+
+    var canvas = document.getElementById('gameArea'),
+    context = canvas.getContext('2d');
+    console.log("done");
+
+    // Rotates the canvas 90 degrees
+    context.rotate(90 * (Math.PI / 180));
+
     // pText = new createjs.Text("Loading", "4rem Arial", "#FFF");
     // pText.textBaseline="middle";
     // pText.textAlign="center";
