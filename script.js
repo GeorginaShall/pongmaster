@@ -330,7 +330,7 @@ function loaded() {
     //game running
 function startGame(){
 
-  //alert('hi');
+  //alert('win');
   stage.mouseMoveOutside = true;
   stage.on("stagemousemove", function(evt) {
 
@@ -616,7 +616,12 @@ function alert(e){
         timer_on = 0;
         createjs.Sound.stop();
         win = new createjs.Bitmap(queue.getResult('win'));
-        win.x = mywidth/4;
+        win.textAlign="center";
+        win.textBaseline="middle";
+       win.x=(mywidth/2) - (win.image.width/2) ;
+
+
+
         win.y = myheight;
 
 
@@ -643,7 +648,7 @@ function alert(e){
         timer_on = 0;
         createjs.Sound.stop();
         lose = new createjs.Bitmap(queue.getResult('lose'));
-        lose.x = mywidth/4;
+        lose.x = (mywidth/2) - (lose.image.width/2) ;
         lose.y = myheight;        
         Tween.get(lose).to({y: myheight/6}, myheight);      
         stage.addChild(lose);
@@ -658,7 +663,7 @@ function alert(e){
       timer_on = 0;
       createjs.Sound.stop();
       timesup = new createjs.Bitmap(queue.getResult('timesup'));
-      timesup.x = mywidth/4;
+      timesup.x = (mywidth/2) - (timesup.image.width/2) ;
       timesup.y =  myheight;        
       Tween.get(timesup).to({y:myheight/6}, myheight);  
       stage.addChild(timesup);    
