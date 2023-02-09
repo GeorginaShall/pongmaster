@@ -330,7 +330,7 @@ function loaded() {
     //game running
 function startGame(){
 
-  
+  //alert('hi');
   stage.mouseMoveOutside = true;
   stage.on("stagemousemove", function(evt) {
 
@@ -352,18 +352,20 @@ function startGame(){
     player = new createjs.Bitmap(queue.getResult('playerPaddle'));
     player.scaleX=1.5;
     player.scaleY=0.75;
-     player.x = (mywidth/2) - 15;//2;
+     player.x = (mywidth/2) - ((player.image.width*1.5)/2);//2;
      player.y = myheight - 25; //230 - 25;//160 - 37.5;
 
     cpu = new createjs.Bitmap(queue.getResult('cpuPaddle'));
     cpu.scaleX=1.5;
     cpu.scaleY=0.75;
-     cpu.x = (mywidth/2)  - 15;//480 - 25;
+     cpu.x = (mywidth/2)  - ((cpu.image.width*1.5)/2);//480 - 25;
      cpu.y = 55;//160 - 37.5;
 
+     //console.log(cpu.image.width);
+
     ball = new createjs.Bitmap(queue.getResult('ball'));
-     ball.x = (mywidth/2) - 15;;
-     ball.y = (myheight/2) - 15;
+     ball.x = (mywidth/2) - (ball.image.width/2);;
+     ball.y = (myheight/2) - (ball.image.width/2);
 
     playerScore = new createjs.Text('0', ' 2rem Arial', '#fff');
      playerScore.x = 211;
@@ -414,9 +416,9 @@ function movePaddle(){
     }
     //if(player.y >= 245) //stop the paddle from going out of canvas 
 
-    if(player.x >= mywidth - 115) //stop the paddle from going out of canvas 
+    if(player.x >= mywidth - (player.image.width*1.5)) //stop the paddle from going out of canvas 
     {
-      player.x = mywidth - 115;
+      player.x = mywidth - (player.image.width*1.5);
     }
     if(player.x <= 0)
     {
@@ -467,7 +469,7 @@ function hitWall(){
  wallHitSound.volume = 0.1;
  };
 
- if((ball.x + (50)) > mywidth) { //right wall
+ if((ball.x + (ball.image.width)) > mywidth) { //right wall
   xSpeed = -xSpeed; 
     
  let wallHitSound = createjs.Sound.play("wall");
@@ -552,12 +554,12 @@ function moveCpu() {
   // }
 
    //Cpu Movement / computer AI 
-   if((cpu.x+32) < (ball.x-14)){
+   if((cpu.x + ((cpu.image.width*1.5)/2)) < (ball.x - ball.image.width)){
     cpu.x = cpu.x + cpuSpeed;
  }
  
  
- else if((cpu.x+32) > (ball.x+14)){
+ else if((cpu.x + ((cpu.image.width*1.5)/2)) > (ball.x + ball.image.width)){
     cpu.x = cpu.x - cpuSpeed;
 }
 }
@@ -583,7 +585,7 @@ function hitTest() {
     if(ball.y + 30 -22 > cpu.y 
       && ball.y + 30 -22< cpu.y + 22 
       && ball.x >= cpu.x 
-      && ball.x < cpu.x + 75)
+      && ball.x < cpu.x + (cpu.image.width*1.5))
       
       {
       ySpeed *= -1;
@@ -595,7 +597,7 @@ function hitTest() {
   if(ball.y +22 <= player.y + 22
     && ball.y +22 > player.y 
     && ball.x >= player.x 
-    && ball.x < player.x + 75)
+    && ball.x < player.x + (player.image.width*1.5))
     
     {       
       ySpeed *= -1;
@@ -614,8 +616,8 @@ function alert(e){
         timer_on = 0;
         createjs.Sound.stop();
         win = new createjs.Bitmap(queue.getResult('win'));
-        win.x = 15;
-        win.y = -150;
+        win.x = mywidth/4;
+        win.y = myheight;
 
 
         // win = new createjs.Text('Congratulations! \n\n\n You Won!', ' 4rem Arial', '#fff');
@@ -630,7 +632,7 @@ function alert(e){
         // win.x=stage.canvas.width/2;
         // win.y = 200;
 
-        Tween.get(win).to({y: 10}, 500);
+        Tween.get(win).to({y: myheight/6}, myheight);
         stage.addChild(win);
 
         //rmv toggleAudio_game,
@@ -641,9 +643,9 @@ function alert(e){
         timer_on = 0;
         createjs.Sound.stop();
         lose = new createjs.Bitmap(queue.getResult('lose'));
-        lose.x = 15;
-        lose.y = -150;        
-        Tween.get(lose).to({y: 10}, 500);      
+        lose.x = mywidth/4;
+        lose.y = myheight;        
+        Tween.get(lose).to({y: myheight/6}, myheight);      
         stage.addChild(lose);
 
              //rmv toggleAudio_game,
@@ -656,9 +658,9 @@ function alert(e){
       timer_on = 0;
       createjs.Sound.stop();
       timesup = new createjs.Bitmap(queue.getResult('timesup'));
-      timesup.x = 0;
-      timesup.y = -150;        
-      Tween.get(timesup).to({y: 10}, 500);  
+      timesup.x = mywidth/4;
+      timesup.y =  myheight;        
+      Tween.get(timesup).to({y:myheight/6}, myheight);  
       stage.addChild(timesup);    
 console.log('time up')
 
