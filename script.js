@@ -38,10 +38,10 @@ let time;
 
 //ball speed on axis
 let xSpeed = 5;
-let ySpeed = 5;
+let ySpeed = 10;
 
 //speed of the CPU paddle
-let cpuSpeed = 4.5; 
+let cpuSpeed = 4;// 4.5; 
 
 let myheight , mywidth;
 
@@ -483,7 +483,25 @@ function timedCount() {
   
   if ( parseInt(time.text) > 0 && timer_on == 1)
   
-  {time.text = parseInt(time.text - 1);}
+  {time.text = parseInt(time.text - 1);
+  
+  cpuSpeed++;
+
+  
+// ySpeed++;
+  console.log(cpuSpeed);
+
+
+  console.log(ySpeed);
+
+  if(ySpeed > 0 ) ySpeed = ySpeed+0.5;
+  if(ySpeed < 0 ) ySpeed = ySpeed-0.5;
+
+  console.log(xSpeed);
+
+  if(xSpeed > 0 ) xSpeed = xSpeed+0.5;
+  if(xSpeed < 0 ) xSpeed = xSpeed-0.5;
+}
 
 
  if( parseInt(time.text) == 0) { 
@@ -506,6 +524,8 @@ function timedCount() {
 }
 
 function trackScore(){
+
+
   // if((ball.x) < 0){
   //   xSpeed = -xSpeed;
   //   cpuScore.text = parseInt(cpuScore.text + 1);
@@ -526,6 +546,9 @@ function trackScore(){
   // }
 
  if((ball.y - (20)) > myheight){
+
+
+
     ySpeed = -ySpeed;
     cpuScore.text = parseInt(cpuScore.text + 1);
     settings.speed--;
@@ -536,6 +559,9 @@ function trackScore(){
   }
 
    if((ball.y) < 40){
+
+
+
     ySpeed = -ySpeed;
     playerScore.text = parseInt(playerScore.text + 1);
     
@@ -592,6 +618,7 @@ function hitTest() {
   
   let paddleHitSound = createjs.Sound.play("hitPaddle");
   paddleHitSound.volume = 0.1;
+  
       
   }
   if(ball.y +22 <= player.y + 22
