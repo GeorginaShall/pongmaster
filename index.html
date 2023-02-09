@@ -28,33 +28,6 @@ position:fixed; ">
     <script>
         $("#gameArea").bind("wheel mousewheel", function(e) {e.preventDefault()});
     </script>
-<script>
- var canvas = document.getElementById('gameArea');
-    
-    console.log('canvas');
-   // fitToContainer(canvas);
-      
-    // Insert values on load of page
-    window.onload = function() {
-    // Make it visually fill the positioned parent
-    canvas.style.width ='100%';
-    canvas.style.height='100%';
-    // ...then set the internal size to match
-    canvas.width  = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
-    }; 
-    // Change values when window is resized
-    window.onresize = function() {   
-    // Make it visually fill the positioned parent
-    canvas.style.width ='100%';
-    canvas.style.height='100%';
-    // ...then set the internal size to match
-    canvas.width  = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
-
-    location.reload();
-    };
-</script>
 
 
 </body>

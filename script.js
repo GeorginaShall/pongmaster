@@ -43,6 +43,9 @@ let ySpeed = 5;
 //speed of the CPU paddle
 let cpuSpeed = 4.5; 
 
+let myheight , mywidth;
+
+
 //menu and game music
 //let inMenuSound, inGameSound, toggleAudio_game, toggleAudio_menu;
 
@@ -172,6 +175,43 @@ function preload(){
 //   canvas.height = canvas.offsetHeight;
 // }
 
+var canvas = document.getElementById('gameArea');
+    
+    console.log('canvas');
+   // fitToContainer(canvas);
+      
+    // Insert values on load of page
+    window.onload = function() {
+    // Make it visually fill the positioned parent
+    canvas.style.width ='100%';
+    canvas.style.height='100%';
+    // ...then set the internal size to match
+    canvas.width  = canvas.offsetWidth;
+
+    mywidth = canvas.width;
+
+
+    canvas.height = canvas.offsetHeight;
+
+    myheight = canvas.height;
+
+
+    }; 
+
+
+    // Change values when window is resized
+    window.onresize = function() {   
+    // Make it visually fill the positioned parent
+    canvas.style.width ='100%';
+    canvas.style.height='100%';
+    // ...then set the internal size to match
+    canvas.width  = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+
+    location.reload();
+    };
+
+
 
 function loaded() {
 
@@ -203,10 +243,10 @@ function loaded() {
     //start button
 
     button = new createjs.Text('Start', ' 4rem 	Arial', '#fff');
-    button.x=stage.canvas.width/2;
+    button.x= mywidth/2;
         button.textAlign="center";
     button.textBaseline="middle";
-    button.y =stage.canvas.height/1.7;
+    button.y = myheight/1.7;
 
 
 
@@ -312,18 +352,18 @@ function startGame(){
     player = new createjs.Bitmap(queue.getResult('playerPaddle'));
     player.scaleX=1.5;
     player.scaleY=0.75;
-     player.x = 240 - 15;//2;
-     player.y = 320 - 25; //230 - 25;//160 - 37.5;
+     player.x = (mywidth/2) - 15;//2;
+     player.y = myheight - 25; //230 - 25;//160 - 37.5;
 
     cpu = new createjs.Bitmap(queue.getResult('cpuPaddle'));
     cpu.scaleX=1.5;
     cpu.scaleY=0.75;
-     cpu.x = 240 - 15;//480 - 25;
-     cpu.y = 35;//160 - 37.5;
+     cpu.x = (mywidth/2)  - 15;//480 - 25;
+     cpu.y = 55;//160 - 37.5;
 
     ball = new createjs.Bitmap(queue.getResult('ball'));
-     ball.x = 240 - 15;;
-     ball.y = 160 - 15;
+     ball.x = (mywidth/2) - 15;;
+     ball.y = (myheight/2) - 15;
 
     playerScore = new createjs.Text('0', ' 2rem Arial', '#fff');
      playerScore.x = 211;
@@ -374,9 +414,9 @@ function movePaddle(){
     }
     //if(player.y >= 245) //stop the paddle from going out of canvas 
 
-    if(player.x >= 405) //stop the paddle from going out of canvas 
+    if(player.x >= mywidth - 115) //stop the paddle from going out of canvas 
     {
-      player.x = 405;
+      player.x = mywidth - 115;
     }
     if(player.x <= 0)
     {
@@ -386,11 +426,11 @@ function movePaddle(){
 
 //reset funciton for when a point is scored. Basically resets the position of everything
 function reset(){
-  ball.x = 240 - 15;
-  ball.y = 160 - 15;
+  ball.x = (mywidth/2)  - 15;
+  ball.y = (myheight/2) - 15;
 
-  cpu.x = 240 - 15;//480 - 25;
-  player.x = 240 - 15;//2;
+  cpu.x = (mywidth/2)  - 15;//480 - 25;
+  player.x = (mywidth/2)  - 15;//2;
 
   //player.y = 160 - 37.5;
   //cpu.y = 160 - 37.5;    
@@ -427,7 +467,7 @@ function hitWall(){
  wallHitSound.volume = 0.1;
  };
 
- if((ball.x + (60)) > 480) { //right wall
+ if((ball.x + (30)) > mywidth) { //right wall
   xSpeed = -xSpeed; 
     
  let wallHitSound = createjs.Sound.play("wall");
@@ -483,7 +523,7 @@ function trackScore(){
   //   playerScoreSound.volume = 0.1;
   // }
 
- if((ball.y - (30)) > 260){
+ if((ball.y - (20)) > myheight){
     ySpeed = -ySpeed;
     cpuScore.text = parseInt(cpuScore.text + 1);
     settings.speed--;
@@ -493,7 +533,7 @@ function trackScore(){
     enemyScoreSound.volume = 0.1;
   }
 
-   if((ball.y) < 20){
+   if((ball.y) < 45){
     ySpeed = -ySpeed;
     playerScore.text = parseInt(playerScore.text + 1);
     
