@@ -115,10 +115,10 @@ function preload(){
             {id:"start_game", src:"gfx/img/instructions_start.png"}, 
             //{id:"howTo", src:"gfx/img/howTo.png"},              
            // {id:"instruction", src:"gfx/img/howToPlay.png"},          
-			{id:"playerScore", src:"gfx/sound/playerScore.mp3"},
-            {id:"enemyScore", src:"gfx/sound/enemyScore.mp3"},
-            {id:"winScreen", src:"gfx/sound/win.mp3"},
-            {id:"loseScreen", src:"gfx/sound/lose.mp3"},
+			    //  {id:"playerScore", src:"gfx/sound/playerScore.mp3"},
+         //   {id:"enemyScore", src:"gfx/sound/enemyScore.mp3"},
+           // {id:"winScreen", src:"gfx/sound/win.mp3"},
+            // {id:"loseScreen", src:"gfx/sound/lose.mp3"},
 			{id:"hitPaddle", src:"gfx/sound/hitPaddle.mp3"},
             {id:"wall", src:"gfx/sound/hit.mp3"},
            // {id:"inMenu", src:"gfx/sound/inMenu.mp3"},
@@ -748,15 +748,15 @@ function gameStatus() {
   if(playerScore.text == '3'){
    alert('win');
    
-   let winSound = createjs.Sound.play("winScreen");
-   winSound.volume = 0.1;
+  //  let winSound = createjs.Sound.play("winScreen");
+  //  winSound.volume = 0.1;
  }       
   if(cpuScore.text == '3'){
    alert('lose');
    
    
-   let loseSound = createjs.Sound.play("loseScreen");
-   loseSound.volume = 0.1;
+  //  let loseSound = createjs.Sound.play("loseScreen");
+  //  loseSound.volume = 0.1;
   //  createjs.Touch.disable(stage);
   }
 if(time.text == '0'){
