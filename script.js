@@ -378,11 +378,11 @@ function startGame(){
      cpuScore.y = 5;
 
      timer = new createjs.Text('Timer: ', ' 2rem Arial', '#fff');
-     timer.x = 50;
+     timer.x = 5;
      timer.y = 5;
 
      time = new createjs.Text('60',  ' 2rem Arial', '#fff');
-     time.x = 150;
+     time.x = 100;
      time.y = 5;
 
     //audio stop/start button
