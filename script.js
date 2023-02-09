@@ -467,7 +467,7 @@ function hitWall(){
  wallHitSound.volume = 0.1;
  };
 
- if((ball.x + (30)) > mywidth) { //right wall
+ if((ball.x + (50)) > mywidth) { //right wall
   xSpeed = -xSpeed; 
     
  let wallHitSound = createjs.Sound.play("wall");
@@ -533,7 +533,7 @@ function trackScore(){
     enemyScoreSound.volume = 0.1;
   }
 
-   if((ball.y) < 45){
+   if((ball.y) < 40){
     ySpeed = -ySpeed;
     playerScore.text = parseInt(playerScore.text + 1);
     
