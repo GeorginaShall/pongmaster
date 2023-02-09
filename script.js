@@ -351,20 +351,22 @@ function startGame(){
 
     player = new createjs.Bitmap(queue.getResult('playerPaddle'));
     player.scaleX=1.5;
-    player.scaleY=0.75;
+    player.scaleY=0.5;
      player.x = (mywidth/2) - ((player.image.width*1.5)/2);//2;
      player.y = myheight - 25; //230 - 25;//160 - 37.5;
 
     cpu = new createjs.Bitmap(queue.getResult('cpuPaddle'));
     cpu.scaleX=1.5;
-    cpu.scaleY=0.75;
+    cpu.scaleY=0.5;
      cpu.x = (mywidth/2)  - ((cpu.image.width*1.5)/2);//480 - 25;
      cpu.y = 55;//160 - 37.5;
 
      //console.log(cpu.image.width);
 
     ball = new createjs.Bitmap(queue.getResult('ball'));
-     ball.x = (mywidth/2) - (ball.image.width/2);;
+    ball.scaleX=0.75;
+    ball.scaleY=0.75;
+    ball.x = (mywidth/2) - (ball.image.width/2);;
      ball.y = (myheight/2) - (ball.image.width/2);
 
     playerScore = new createjs.Text('0', ' 2rem Arial', '#fff');
