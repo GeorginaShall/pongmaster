@@ -370,11 +370,11 @@ function startGame(){
      ball.y = (myheight/2) - (ball.image.width/2);
 
     playerScore = new createjs.Text('0', ' 2rem Arial', '#fff');
-     playerScore.x = 211;
+     playerScore.x = (mywidth/2) - 40;
      playerScore.y = 5;
      
     cpuScore = new createjs.Text('0', ' 2rem Arial', '#fff');
-     cpuScore.x = 262;
+     cpuScore.x = (mywidth/2) + 40;
      cpuScore.y = 5;
 
      timer = new createjs.Text('Timer: ', ' 2rem Arial', '#fff');
@@ -559,8 +559,8 @@ cpuSpeed=4;
 
     
     reset();
-    let enemyScoreSound = createjs.Sound.play("enemyScore");
-    enemyScoreSound.volume = 0.1;
+    // let enemyScoreSound = createjs.Sound.play("enemyScore");
+    // enemyScoreSound.volume = 0.1;
   }
 
    if((ball.y) < 40){
@@ -573,8 +573,8 @@ cpuSpeed=4;
     playerScore.text = parseInt(playerScore.text + 1);
     
     reset();
-    let playerScoreSound = createjs.Sound.play("playerScore");
-    playerScoreSound.volume = 0.1;
+    // let playerScoreSound = createjs.Sound.play("playerScore");
+    // playerScoreSound.volume = 0.1;
   }
 }
 
