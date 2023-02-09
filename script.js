@@ -59,18 +59,21 @@ let cpuSpeed = 4.5;
 // }
 
 
+
+
+
+
 function preload(){
+
+
     stage = new createjs.Stage("gameArea");
     stage.mouseEventsEnabled = true;
     createjs.Touch.enable(stage);
 
 
-    var canvas = document.getElementById('gameArea'),
-    context = canvas.getContext('2d');
-    console.log("done");
 
     // Rotates the canvas 90 degrees
-    context.rotate(90 * (Math.PI / 180));
+    //context.rotate(90 * (Math.PI / 180));
 
     // pText = new createjs.Text("Loading", "4rem Arial", "#FFF");
     // pText.textBaseline="middle";
@@ -158,7 +161,26 @@ function preload(){
 // }
 
 //loading completed, do this
+
+
+// function fitToContainer(canvas){
+//   // Make it visually fill the positioned parent
+//   canvas.style.width ='100%';
+//   canvas.style.height='100%';
+//   // ...then set the internal size to match
+//   canvas.width  = canvas.offsetWidth;
+//   canvas.height = canvas.offsetHeight;
+// }
+
+
 function loaded() {
+
+
+  
+ 
+
+
+
     stage.removeChild(pText);
     
     // inMenuSound = createjs.Sound.play("inMenu", {loop:-1});
