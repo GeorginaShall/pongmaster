@@ -896,13 +896,13 @@ function gameStatus() {
     timedCount();
   } 
 }
-  if(playerScore.text == '3'){
+  if(playerScore.text == '1'){
    alert('win');
    
   //  let winSound = createjs.Sound.play("winScreen");
   //  winSound.volume = 0.1;
  }       
-  if(cpuScore.text == '3'){
+  if(cpuScore.text == '1'){
    alert('lose');
    
    
