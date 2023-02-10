@@ -388,19 +388,19 @@ function startGame(){
      ball.y = (myheight/2) - (ball.image.width/2);
 
     playerScore = new createjs.Text('0', ' 2rem Arial', '#fff');
-     playerScore.x = (mywidth/2) - 40;
-     playerScore.y = 5;
+    //  playerScore.x = (mywidth/2) - 40;
+    //  playerScore.y = 5;
      
     cpuScore = new createjs.Text('0', ' 2rem Arial', '#fff');
-     cpuScore.x = (mywidth/2) + 40;
-     cpuScore.y = 5;
+    //  cpuScore.x = (mywidth/2) + 40;
+    //  cpuScore.y = 5;
 
      timer = new createjs.Text('Timer: ', ' 2rem Arial', '#fff');
-     timer.x = 5;
+     timer.x = (mywidth/2) - 50;
      timer.y = 5;
 
      time = new createjs.Text('60',  ' 2rem Arial', '#fff');
-     time.x = 100;
+     time.x = (mywidth/2) + 50;//100;
      time.y = 5;
 
     //audio stop/start button
@@ -423,8 +423,8 @@ function startGame(){
        
 
 
-      //add toggleAudio_game, , restart_game
-    stage.addChild(playerScore, cpuScore, timer, time, player, cpu, ball );
+      //add toggleAudio_game, , restart_game, playerScore, cpuScore, 
+    stage.addChild(timer, time, player, cpu, ball );
 
   //  alert('win');
 }
@@ -688,9 +688,9 @@ function alert(e){
 
         var bounds = restartt.getBounds();
         console.log(bounds);
-
+//hide  playerScore, cpuScore, 
         Tween.get(win, restartt).to({y: myheight/6}, myheight);
-        stage.removeChild(playerScore, cpuScore, timer, time, player, cpu, ball );
+        stage.removeChild(timer, time, player, cpu, ball );
         stage.addChild(win, restartt);
 
         var pad = 20; //innenrand, padding
@@ -762,7 +762,7 @@ function alert(e){
       console.log(bounds);
 
       Tween.get(lose, restartt).to({y: myheight/6}, myheight);
-      stage.removeChild(playerScore, cpuScore, timer, time, player, cpu, ball );
+      stage.removeChild( timer, time, player, cpu, ball );
       stage.addChild(lose, restartt);
 
       var pad = 20; //innenrand, padding
@@ -823,7 +823,7 @@ function alert(e){
         console.log(bounds);
 
         Tween.get(timesup, restartt).to({y: myheight/6}, myheight);
-        stage.removeChild(playerScore, cpuScore, timer, time, player, cpu, ball );
+        stage.removeChild(timer, time, player, cpu, ball );
         stage.addChild(timesup, restartt);
 
         var pad = 20; //innenrand, padding
@@ -881,7 +881,7 @@ function alert(e){
 
 
 function restartGame(){
-    stage.removeChild(player, ball, cpu, playerScore, cpuScore, timer, time);
+    stage.removeChild(player, ball, cpu, timer, time);
     createjs.Sound.stop();
     reset();
     startGame();
