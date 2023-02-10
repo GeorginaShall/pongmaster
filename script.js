@@ -108,8 +108,8 @@ function preload(){
 			{id:"cpuPaddle", src:"gfx/img/paddlenew.png"},
 			{id:"playerPaddle", src:"gfx/img/paddlenew.png"},
 			{id:"ball", src:"gfx/img/ball.png"},
-			{id:"win", src:"gfx/img/win.png"},
-            {id:"lose", src:"gfx/img/lose.png"},
+			//{id:"win", src:"gfx/img/win.png"},
+           // {id:"lose", src:"gfx/img/lose.png"},
             //{id:"start", src:"gfx/img/start.png"},
             //{id:"title", src:"gfx/img/title.png"},  
             {id:"start_game", src:"gfx/img/instructions_start.png"}, 
@@ -221,7 +221,7 @@ function loaded() {
 
 
 
-    stage.removeChild(pText);
+    //stage.removeChild(pText);
     
     // inMenuSound = createjs.Sound.play("inMenu", {loop:-1});
     //  inMenuSound.volume = 0.05;
@@ -239,15 +239,21 @@ function loaded() {
      let title2 = new createjs.Text('Legends Never Die', ' 2rem Arial', '#fff');
      title2.x=stage.canvas.width/2;
      title2.textAlign="center";
-     title2.y = 90;
+     title2.y = 90;     //title2.style.display = "block"; 
+    // title2.style.backgroundColor= "red";
     //start button
 
-    button = new createjs.Text('Start', ' 4rem 	Arial', '#fff');
+    let button = new createjs.Text('Start', ' 4rem 	Arial', '#fff');
+
     button.x= mywidth/2;
-        button.textAlign="center";
+    button.textAlign="center";
     button.textBaseline="middle";
     button.y = myheight/1.7;
-
+    button.outline = 2;
+    var bounds = button.getBounds();
+    console.log(bounds);
+   
+//button.setBounds(0,0,400,500);
 
 
     // let button = new createjs.Bitmap(queue.getResult('start'));
@@ -274,7 +280,20 @@ function loaded() {
 
       
     stage.addChild(button, title,title2);
-    
+
+    var pad = 20; //innenrand, padding
+// Hier wird ein Graphics Objekt erzeugt
+//dann werden die Eigenschaften wie Füllung Linie etc zugewiesen
+
+var g = new createjs.Graphics();
+g.setStrokeStyle(1);
+g.beginStroke("#000000");
+g.beginLinearGradientFill(["#540","black"], [0,1], 0, 20, 0, 320);
+g.drawRect(button.x - (pad/2) + bounds.x, button.y - pad + bounds.y, bounds.width + pad , bounds.height + pad );
+//Das Shape wird intialisiert und das Graphics Objekt in der Konstruktorfunktion
+//zugewiesen. Shape(g)
+var bg = new createjs.Shape(g);
+stage.addChildAt(bg, 0);
     //click to stop or start the audio
     // toggleAudio_menu.addEventListener('click', function(e){
     //   inMenuPause();
@@ -282,8 +301,8 @@ function loaded() {
 
 //rmv , toggleAudio_menu instruction,
     //click on the start game button => start the game
-    button.addEventListener('click', function(e){
-     stage.removeChild(e.target,  title,title2);
+    bg.addEventListener('click', function(e){
+     stage.removeChild(e.target,  title,title2, button);
     //  inMenuPause();
       startGame();
     });
@@ -330,7 +349,6 @@ function loaded() {
     //game running
 function startGame(){
 
-  //alert('win');
   stage.mouseMoveOutside = true;
   stage.on("stagemousemove", function(evt) {
 
@@ -407,6 +425,8 @@ function startGame(){
 
       //add toggleAudio_game, , restart_game
     stage.addChild(playerScore, cpuScore, timer, time, player, cpu, ball );
+
+  //  alert('win');
 }
     
 function movePaddle(){
@@ -591,7 +611,6 @@ function moveCpu() {
     cpu.x = cpu.x + cpuSpeed;
  }
  
- 
  else if((cpu.x + ((cpu.image.width*1.5)/2)) > (ball.x + ball.image.width)){
     cpu.x = cpu.x - cpuSpeed;
 }
@@ -649,14 +668,50 @@ function alert(e){
         settings.gameRunning=false;
         timer_on = 0;
         createjs.Sound.stop();
-        win = new createjs.Bitmap(queue.getResult('win'));
+
+
+        //win = new createjs.Bitmap(queue.getResult('win'));
+        win = new createjs.Text('You Won!\nCongrats!', ' 4rem Arial', '#fff');
+        win.x=stage.canvas.width/2;
+        win.y = stage.canvas.height/4;
+      
         win.textAlign="center";
         win.textBaseline="middle";
-       win.x=(mywidth/2) - (win.image.width/2) ;
-
-
-
+      // win.x=(mywidth/2) - (win.image.width/2) ;
         win.y = myheight;
+
+        let restartt = new createjs.Text('Restart', ' 2rem Arial', '#fff');
+        restartt.x=stage.canvas.width/2;
+        restartt.textAlign="center";
+        restartt.y = stage.canvas.height/2;
+        restartt.textBaseline="middle";  
+
+        var bounds = restartt.getBounds();
+        console.log(bounds);
+
+        Tween.get(win, restartt).to({y: myheight/6}, myheight);
+        stage.removeChild(playerScore, cpuScore, timer, time, player, cpu, ball );
+        stage.addChild(win, restartt);
+
+        var pad = 20; //innenrand, padding
+        // Hier wird ein Graphics Objekt erzeugt
+        //dann werden die Eigenschaften wie Füllung Linie etc zugewiesen
+        
+        var gr = new createjs.Graphics();
+        gr.setStrokeStyle(1);
+        gr.beginStroke("#000000");
+        gr.beginLinearGradientFill(["#540","black"], [0,1], 0, 20, 0, 320);
+        gr.drawRect(restartt.x - (pad/2) + bounds.x, restartt.y - pad + bounds.y, bounds.width + pad , bounds.height + pad );
+        //Das Shape wird intialisiert und das Graphics Objekt in der Konstruktorfunktion
+        //zugewiesen. Shape(g)
+        var bgr = new createjs.Shape(gr);
+        stage.addChildAt(bgr, 0);
+
+
+        bgr.addEventListener('click', function(e){
+          stage.removeChild(e.target,  win, restartt);
+              restartGame();
+            });
 
 
         // win = new createjs.Text('Congratulations! \n\n\n You Won!', ' 4rem Arial', '#fff');
@@ -671,37 +726,125 @@ function alert(e){
         // win.x=stage.canvas.width/2;
         // win.y = 200;
 
-        Tween.get(win).to({y: myheight/6}, myheight);
-        stage.addChild(win);
 
         //rmv toggleAudio_game,
        // stage.removeChild( restart_game);
         
-    }else if(e == 'lose'){
-        settings.gameRunning=false;
-        timer_on = 0;
-        createjs.Sound.stop();
-        lose = new createjs.Bitmap(queue.getResult('lose'));
-        lose.x = (mywidth/2) - (lose.image.width/2) ;
-        lose.y = myheight;        
-        Tween.get(lose).to({y: myheight/6}, myheight);      
-        stage.addChild(lose);
-
-             //rmv toggleAudio_game,
-        //stage.removeChild(restart_game);
-        
     }
+    else if(e == 'lose'){
+      settings.gameRunning=false;
+      timer_on = 0;
+      createjs.Sound.stop();
+      // lose = new createjs.Bitmap(queue.getResult('lose'));
+      // lose.x = (mywidth/2) - (lose.image.width/2) ;
+      // lose.y = myheight;  
+
+      //Tween.get(lose).to({y: myheight/6}, myheight);      
+      //stage.addChild(lose);
+
+      //lose = new createjs.Bitmap(queue.getResult('lose'));
+      lose = new createjs.Text('GameOver!', ' 4rem Arial', '#fff');
+      lose.x=stage.canvas.width/2;
+      lose.y = stage.canvas.height/4;
+    
+      lose.textAlign="center";
+      lose.textBaseline="middle";
+    // lose.x=(mywidth/2) - (lose.image.width/2) ;
+      lose.y = myheight;
+
+      let restartt = new createjs.Text('Restart', ' 2rem Arial', '#fff');
+      restartt.x=stage.canvas.width/2;
+      restartt.textAlign="center";
+      restartt.y = stage.canvas.height/2;
+      restartt.textBaseline="middle";  
+
+      var bounds = restartt.getBounds();
+      console.log(bounds);
+
+      Tween.get(lose, restartt).to({y: myheight/6}, myheight);
+      stage.removeChild(playerScore, cpuScore, timer, time, player, cpu, ball );
+      stage.addChild(lose, restartt);
+
+      var pad = 20; //innenrand, padding
+      // Hier wird ein Graphics Objekt erzeugt
+      //dann werden die Eigenschaften wie Füllung Linie etc zugewiesen
+      
+      var gr = new createjs.Graphics();
+      gr.setStrokeStyle(1);
+      gr.beginStroke("#000000");
+      gr.beginLinearGradientFill(["#540","black"], [0,1], 0, 20, 0, 320);
+      gr.drawRect(restartt.x - (pad/2) + bounds.x, restartt.y - pad + bounds.y, bounds.width + pad , bounds.height + pad );
+      //Das Shape wird intialisiert und das Graphics Objekt in der Konstruktorfunktion
+      //zugewiesen. Shape(g)
+      var bgr = new createjs.Shape(gr);
+      stage.addChildAt(bgr, 0);
+
+
+      bgr.addEventListener('click', function(e){
+        stage.removeChild(e.target,  lose, restartt);
+            restartGame();
+          });
+
+           //rmv toggleAudio_game,
+      //stage.removeChild(restart_game);
+      
+  }
 
     else if(e == 'timesup'){
       settings.gameRunning=false;
       timer_on = 0;
       createjs.Sound.stop();
-      timesup = new createjs.Bitmap(queue.getResult('timesup'));
-      timesup.x = (mywidth/2) - (timesup.image.width/2) ;
-      timesup.y =  myheight;        
-      Tween.get(timesup).to({y:myheight/6}, myheight);  
-      stage.addChild(timesup);    
-console.log('time up')
+//       timesup = new createjs.Bitmap(queue.getResult('timesup'));
+//       timesup.x = (mywidth/2) - (timesup.image.width/2) ;
+//       timesup.y =  myheight;        
+//       Tween.get(timesup).to({y:myheight/6}, myheight);  
+//       stage.addChild(timesup);    
+// console.log('time up')
+
+
+
+        //timesup = new createjs.Bitmap(queue.getResult('timesup'));
+        timesup = new createjs.Text('Time is \n Up!', ' 4rem Arial', '#fff');
+        timesup.x=stage.canvas.width/2;
+        timesup.y = stage.canvas.height/4;
+      
+        timesup.textAlign="center";
+        timesup.textBaseline="middle";
+      // timesup.x=(mywidth/2) - (timesup.image.width/2) ;
+        timesup.y = myheight;
+
+        let restartt = new createjs.Text('Restart', ' 2rem Arial', '#fff');
+        restartt.x=stage.canvas.width/2;
+        restartt.textAlign="center";
+        restartt.y = stage.canvas.height/2;
+        restartt.textBaseline="middle";  
+
+        var bounds = restartt.getBounds();
+        console.log(bounds);
+
+        Tween.get(timesup, restartt).to({y: myheight/6}, myheight);
+        stage.removeChild(playerScore, cpuScore, timer, time, player, cpu, ball );
+        stage.addChild(timesup, restartt);
+
+        var pad = 20; //innenrand, padding
+        // Hier wird ein Graphics Objekt erzeugt
+        //dann werden die Eigenschaften wie Füllung Linie etc zugewiesen
+        
+        var gr = new createjs.Graphics();
+        gr.setStrokeStyle(1);
+        gr.beginStroke("#000000");
+        gr.beginLinearGradientFill(["#540","black"], [0,1], 0, 20, 0, 320);
+        gr.drawRect(restartt.x - (pad/2) + bounds.x, restartt.y - pad + bounds.y, bounds.width + pad , bounds.height + pad );
+        //Das Shape wird intialisiert und das Graphics Objekt in der Konstruktorfunktion
+        //zugewiesen. Shape(g)
+        var bgr = new createjs.Shape(gr);
+        stage.addChildAt(bgr, 0);
+
+
+        bgr.addEventListener('click', function(e){
+          stage.removeChild(e.target,  timesup, restartt);
+              restartGame();
+            });
 
 
     //   if(playerScore.text > cpuScore.text) {
@@ -723,18 +866,26 @@ console.log('time up')
     //     stage.addChild(timesup, lose);        
     // }
      //rmv toggleAudio_game,restart_game,
- stage.removeChild( timer, time);
+//  stage.removeChild( timer, time);
 
- console.log('run stop');
- stage.on("dblclick", function(evt) {
-   location.reload();
-   console.log('dblclick');
+//  console.log('run stop');
+//  stage.on("dblclick", function(evt) {
+//    location.reload();
+//    console.log('dblclick');
       
-  });
+//   });
       
        
          
 }}
+
+
+function restartGame(){
+    stage.removeChild(player, ball, cpu, playerScore, cpuScore, timer, time);
+    createjs.Sound.stop();
+    reset();
+    startGame();
+}
 
 //score tracking to know if we should pop a win screen, a lose one or nothing 
 function gameStatus() {
