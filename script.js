@@ -515,6 +515,12 @@ function timedCount() {
   {
     minutes.text = parseInt(minutes.text - 1);
     seconds.text=parseInt(59);
+
+    if ( parseInt(minutes.text) < 10)
+    {
+      minutes.text = ("0"+minutes.text); ;
+    }
+
   }
   
   else if ( (parseInt(seconds.text) > 0   || parseInt(minutes.text) > 0) && timer_on == 1)
@@ -896,7 +902,7 @@ function alert(e){
 
 
 function restartGame(){
-    stage.removeChild(player, ball, cpu, timer, time);
+    stage.removeChild(player, ball, cpu, timer,seconds , split , minutes);
     createjs.Sound.stop();
     reset();
     startGame();
