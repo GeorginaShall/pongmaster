@@ -370,13 +370,13 @@ function startGame(){
     player = new createjs.Bitmap(queue.getResult('playerPaddle'));
     // player.scaleX=1.5;
     // player.scaleY=0.5;
-     player.x = (mywidth/2) - ((player.image.width*1.5)/2);//2;
+     player.x = (mywidth/2) - ((player.image.width)/2);//2;
      player.y = myheight - 25; //230 - 25;//160 - 37.5;
 
     cpu = new createjs.Bitmap(queue.getResult('cpuPaddle'));
     // cpu.scaleX=1.5;
     // cpu.scaleY=0.5;
-     cpu.x = (mywidth/2)  - ((cpu.image.width*1.5)/2);//480 - 25;
+     cpu.x = (mywidth/2)  - ((cpu.image.width)/2);//480 - 25;
      cpu.y = 55;//160 - 37.5;
 
      //console.log(cpu.image.width);
@@ -446,9 +446,9 @@ function movePaddle(){
     }
     //if(player.y >= 245) //stop the paddle from going out of canvas 
 
-    if(player.x >= mywidth - (player.image.width*1.5)) //stop the paddle from going out of canvas 
+    if(player.x >= mywidth - (player.image.width)) //stop the paddle from going out of canvas *1.5
     {
-      player.x = mywidth - (player.image.width*1.5);
+      player.x = mywidth - (player.image.width); //*1.5
     }
     if(player.x <= 0)
     {
@@ -499,7 +499,7 @@ function hitWall(){
  wallHitSound.volume = 0.1;
  };
 
- if((ball.x + (ball.image.width)) > mywidth) { //right wall
+ if((ball.x + (ball.image.width/2)) > mywidth) { //right wall
   xSpeed = -xSpeed; 
     
  let wallHitSound = createjs.Sound.play("wall");
@@ -627,13 +627,36 @@ function moveCpu() {
   //     cpu.y = cpu.y - cpuSpeed;
   // }
 
-   //Cpu Movement / computer AI 
-   if((cpu.x + ((cpu.image.width*1.5)/2)) < (ball.x - ball.image.width)){
+   //Cpu Movement / computer AI *1.5
+
+
+
+   if((cpu.x  + ((cpu.image.width)/2)) < (ball.x - ball.image.width)  ){//
     cpu.x = cpu.x + cpuSpeed;
+
+    console.log('cpux='+ cpu.x);
+
+  // if((cpu.x - ((cpu.image.width)/2)) < 0) { //left wall
+  //   cpu.x =0; 
+  
+  // }
+    // if((cpu.x - ((cpu.image.width)/2)) == 0) { //left wall
+    //   cpu.x = cpuSpeed;; } } 
+
+
  }
  
- else if((cpu.x + ((cpu.image.width*1.5)/2)) > (ball.x + ball.image.width)){
+ else if((cpu.x + ((cpu.image.width)/2)) > (ball.x + ball.image.width)){// ||((cpu.x + (cpu.image.width)) > mywidth) 
     cpu.x = cpu.x - cpuSpeed;
+}
+
+if(cpu.x >= mywidth - (cpu.image.width)) //stop the paddle from going out of canvas *1.5
+{
+  cpu.x = mywidth - (cpu.image.width); //*1.5
+}
+if(cpu.x <= 0)
+{
+  cpu.x = 0;
 }
 }
 
@@ -658,7 +681,7 @@ function hitTest() {
     if(ball.y + 30 -22 > cpu.y 
       && ball.y + 30 -22< cpu.y + 22 
       && ball.x >= cpu.x 
-      && ball.x < cpu.x + (cpu.image.width*1.5))
+      && ball.x < cpu.x + (cpu.image.width))
       
       {
       ySpeed *= -1;
@@ -671,7 +694,7 @@ function hitTest() {
   if(ball.y +22 <= player.y + 22
     && ball.y +22 > player.y 
     && ball.x >= player.x 
-    && ball.x < player.x + (player.image.width*1.5))
+    && ball.x < player.x + (player.image.width))
     
     {       
       ySpeed *= -1;
