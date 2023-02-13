@@ -32,7 +32,7 @@ let playerScore;//player player score
 let cpuScore; //CPU score
 let timer;
 
-let time;
+let seconds , split , minutes;
 
 
 
@@ -105,9 +105,9 @@ function preload(){
     queue = new createjs.LoadQueue(true);
     queue.installPlugin(createjs.Sound);
     queue.loadManifest([
-			{id:"cpuPaddle", src:"gfx/img/paddlenew.png"},
-			{id:"playerPaddle", src:"gfx/img/paddlenew.png"},
-			{id:"ball", src:"gfx/img/ball.png"},
+			{id:"cpuPaddle", src:"gfx/img/paddleai12.1.png"},
+			{id:"playerPaddle", src:"gfx/img/paddleai12.1.png"},
+			{id:"ball", src:"gfx/img/ballai1.png"},
 			//{id:"win", src:"gfx/img/win.png"},
       // {id:"lose", src:"gfx/img/lose.png"},
       //{id:"start", src:"gfx/img/start.png"},
@@ -231,15 +231,15 @@ function loaded() {
     //  title.x = 5;
     //  title.y = -10;
 
-     let title = new createjs.Text('PONG', ' 5rem Arial', '#fff');
-     title.x=stage.canvas.width/2;
-     title.textAlign="center";
-     title.y = 20;
+    //  let title = new createjs.Text('PONG', ' 5rem Arial', '#fff');
+    //  title.x=stage.canvas.width/2;
+    //  title.textAlign="center";
+    //  title.y = 20;
     
-     let title2 = new createjs.Text('Legends Never Die', ' 2rem Arial', '#fff');
-     title2.x=stage.canvas.width/2;
-     title2.textAlign="center";
-     title2.y = 90;     //title2.style.display = "block"; 
+    //  let title2 = new createjs.Text('Legends Never Die', ' 2rem Arial', '#fff');
+    //  title2.x=stage.canvas.width/2;
+    //  title2.textAlign="center";
+    //  title2.y = 90;     //title2.style.display = "block"; 
     // title2.style.backgroundColor= "red";
     //start button
 
@@ -276,10 +276,10 @@ function loaded() {
     //  toggleAudio_menu.y = 280;
 
 
-    //add , toggleAudio_menu, instruction
+    //add , toggleAudio_menu, instruction , title,title2
 
       
-    stage.addChild(button, title,title2);
+    stage.addChild(button);
 
     var pad = 20; //innenrand, padding
 // Hier wird ein Graphics Objekt erzeugt
@@ -299,10 +299,10 @@ stage.addChildAt(bg, 0);
     //   inMenuPause();
     // });
 
-//rmv , toggleAudio_menu instruction,
+//rmv , toggleAudio_menu instruction, title,title2,
     //click on the start game button => start the game
     bg.addEventListener('click', function(e){
-     stage.removeChild(e.target,  title,title2, button);
+     stage.removeChild(e.target,  button);
     //  inMenuPause();
       startGame();
     });
@@ -368,22 +368,22 @@ function startGame(){
     window.addEventListener('keydown', fingerDown);
 
     player = new createjs.Bitmap(queue.getResult('playerPaddle'));
-    player.scaleX=1.5;
-    player.scaleY=0.5;
+    // player.scaleX=1.5;
+    // player.scaleY=0.5;
      player.x = (mywidth/2) - ((player.image.width*1.5)/2);//2;
      player.y = myheight - 25; //230 - 25;//160 - 37.5;
 
     cpu = new createjs.Bitmap(queue.getResult('cpuPaddle'));
-    cpu.scaleX=1.5;
-    cpu.scaleY=0.5;
+    // cpu.scaleX=1.5;
+    // cpu.scaleY=0.5;
      cpu.x = (mywidth/2)  - ((cpu.image.width*1.5)/2);//480 - 25;
      cpu.y = 55;//160 - 37.5;
 
      //console.log(cpu.image.width);
 
     ball = new createjs.Bitmap(queue.getResult('ball'));
-    ball.scaleX=0.75;
-    ball.scaleY=0.75;
+    // ball.scaleX=0.75;
+    // ball.scaleY=0.75;
     ball.x = (mywidth/2) - (ball.image.width/2);;
      ball.y = (myheight/2) - (ball.image.width/2);
 
@@ -399,9 +399,17 @@ function startGame(){
      timer.x = (mywidth/2) - 50;
      timer.y = 5;
 
-     time = new createjs.Text('60',  ' 2rem Arial', '#fff');
-     time.x = (mywidth/2) + 50;//100;
-     time.y = 5;
+     seconds = new createjs.Text('00',  ' 2rem Arial', '#fff');
+     seconds.x = (mywidth/2) + 95;//100;
+     seconds.y = 5;
+
+     split = new createjs.Text(':',  ' 2rem Arial', '#fff');
+     split.x = (mywidth/2) + 85;//100;
+     split.y = 5;
+
+     minutes = new createjs.Text('01',  ' 2rem Arial', '#fff');
+     minutes.x = (mywidth/2) + 50;//100;
+     minutes.y = 5;
 
     //audio stop/start button
     // toggleAudio_game = new createjs.Bitmap(queue.getResult('audioButton'));
@@ -424,7 +432,7 @@ function startGame(){
 
 
       //add toggleAudio_game, , restart_game, playerScore, cpuScore, 
-    stage.addChild(timer, time, player, cpu, ball );
+    stage.addChild(timer, seconds , split , minutes, player, cpu, ball );
 
   //  alert('win');
 }
@@ -502,10 +510,16 @@ function hitWall(){
 }
 
 function timedCount() {
+
+  if ( (parseInt(seconds.text) == 0   && parseInt(minutes.text) > 0) && timer_on == 1)
+  {
+    minutes.text = parseInt(minutes.text - 1);
+    seconds.text=parseInt(59);
+  }
   
-  if ( parseInt(time.text) > 0 && timer_on == 1)
+  else if ( (parseInt(seconds.text) > 0   || parseInt(minutes.text) > 0) && timer_on == 1)
   
-  {time.text = parseInt(time.text - 1);
+  {seconds.text = parseInt(seconds.text - 1);
   
   cpuSpeed++;
 
@@ -526,7 +540,8 @@ function timedCount() {
 }
 
 
- if( parseInt(time.text) == 0) { 
+ if(parseInt(seconds.text) == 0   && parseInt(minutes.text) == 0)
+  { 
  alert('timesup');
   		//to avoid loop of timeout
  timer_on = 0;
@@ -539,7 +554,7 @@ function timedCount() {
   {reset();
     clearTimeout(timeout);
     
-    time.text=parseInt(60);
+    minutes.text=parseInt(01);
   }
 
  timeout = setTimeout(timedCount, 1000);
@@ -690,7 +705,7 @@ function alert(e){
         console.log(bounds);
 //hide  playerScore, cpuScore, 
         Tween.get(win, restartt).to({y: myheight/6}, myheight);
-        stage.removeChild(timer, time, player, cpu, ball );
+        stage.removeChild(timer, seconds , split , minutes, player, cpu, ball );
         stage.addChild(win, restartt);
 
         var pad = 20; //innenrand, padding
@@ -762,7 +777,7 @@ function alert(e){
       console.log(bounds);
 
       Tween.get(lose, restartt).to({y: myheight/6}, myheight);
-      stage.removeChild( timer, time, player, cpu, ball );
+      stage.removeChild( timer, seconds , split , minutes, player, cpu, ball );
       stage.addChild(lose, restartt);
 
       var pad = 20; //innenrand, padding
@@ -823,7 +838,7 @@ function alert(e){
         console.log(bounds);
 
         Tween.get(timesup, restartt).to({y: myheight/6}, myheight);
-        stage.removeChild(timer, time, player, cpu, ball );
+        stage.removeChild(timer, seconds , split , minutes, player, cpu, ball );
         stage.addChild(timesup, restartt);
 
         var pad = 20; //innenrand, padding
@@ -910,7 +925,7 @@ function gameStatus() {
   //  loseSound.volume = 0.1;
   //  createjs.Touch.disable(stage);
   }
-if(time.text == '0'){
+if(parseInt(seconds.text) == '0'   && parseInt(minutes.text) == '0'){
   alert('timesup');
 }
 
