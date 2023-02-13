@@ -248,7 +248,7 @@ function loaded() {
     button.x= mywidth/2;
     button.textAlign="center";
     button.textBaseline="middle";
-    button.y = myheight/1.7;
+    button.y = myheight/2;
     button.outline = 2;
     var bounds = button.getBounds();
     console.log(bounds);
@@ -395,20 +395,20 @@ function startGame(){
     //  cpuScore.x = (mywidth/2) + 40;
     //  cpuScore.y = 5;
 
-     timer = new createjs.Text('Timer: ', ' 2rem Arial', '#fff');
-     timer.x = (mywidth/2) - 50;
-     timer.y = 5;
+    //  timer = new createjs.Text('Timer: ', ' 2rem Arial', '#fff');
+    //  timer.x = (mywidth/2) - 50;
+    //  timer.y = 5;
 
      seconds = new createjs.Text('00',  ' 2rem Arial', '#fff');
-     seconds.x = (mywidth/2) + 95;//100;
+     seconds.x = (mywidth/2) -40 ;//100;
      seconds.y = 5;
 
      split = new createjs.Text(':',  ' 2rem Arial', '#fff');
-     split.x = (mywidth/2) + 85;//100;
+     split.x = (mywidth/2);//100;
      split.y = 5;
 
      minutes = new createjs.Text('01',  ' 2rem Arial', '#fff');
-     minutes.x = (mywidth/2) + 50;//100;
+     minutes.x = (mywidth/2) + 12;//100;
      minutes.y = 5;
 
     //audio stop/start button
@@ -431,8 +431,8 @@ function startGame(){
        
 
 
-      //add toggleAudio_game, , restart_game, playerScore, cpuScore, 
-    stage.addChild(timer, seconds , split , minutes, player, cpu, ball );
+      //add toggleAudio_game, , restart_game, playerScore, cpuScore, timer,
+    stage.addChild( seconds , split , minutes, player, cpu, ball );
 
   //  alert('win');
 }
@@ -709,9 +709,9 @@ function alert(e){
 
         var bounds = restartt.getBounds();
         console.log(bounds);
-//hide  playerScore, cpuScore, 
+//hide  playerScore, cpuScore, timer,
         Tween.get(win, restartt).to({y: myheight/6}, myheight);
-        stage.removeChild(timer, seconds , split , minutes, player, cpu, ball );
+        stage.removeChild( seconds , split , minutes, player, cpu, ball );
         stage.addChild(win, restartt);
 
         var pad = 20; //innenrand, padding
@@ -783,7 +783,7 @@ function alert(e){
       console.log(bounds);
 
       Tween.get(lose, restartt).to({y: myheight/6}, myheight);
-      stage.removeChild( timer, seconds , split , minutes, player, cpu, ball );
+      stage.removeChild( seconds , split , minutes, player, cpu, ball );
       stage.addChild(lose, restartt);
 
       var pad = 20; //innenrand, padding
@@ -844,7 +844,7 @@ function alert(e){
         console.log(bounds);
 
         Tween.get(timesup, restartt).to({y: myheight/6}, myheight);
-        stage.removeChild(timer, seconds , split , minutes, player, cpu, ball );
+        stage.removeChild(seconds , split , minutes, player, cpu, ball );
         stage.addChild(timesup, restartt);
 
         var pad = 20; //innenrand, padding
@@ -902,7 +902,7 @@ function alert(e){
 
 
 function restartGame(){
-    stage.removeChild(player, ball, cpu, timer,seconds , split , minutes);
+    stage.removeChild(player, ball, cpu, seconds , split , minutes);
     createjs.Sound.stop();
     reset();
     startGame();
