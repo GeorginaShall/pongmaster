@@ -1,10 +1,11 @@
+
+
+
 //let timeout;
 let counter = 0;
 let timeout;
 let timer_on = 0;
 
-let counter_on = 0;
-let countertimeout;
 
 "use strict";
 
@@ -13,7 +14,6 @@ let stage, queue, pText;
 
 //game settings
 let settings = {
-  gamecountdown:false,
     gameRunning:false,
     speed: 4.5 //how fast the player's paddle is moving 
 };
@@ -35,7 +35,6 @@ let playerScore;//player player score
 let cpuScore; //CPU score
 let timer;
 
-let button;
 let seconds , split , minutes;
 
 
@@ -247,8 +246,7 @@ function loaded() {
     // title2.style.backgroundColor= "red";
     //start button
 
-    //let button = new createjs.Text('Start', ' 4rem 	Arial', '#fff');
-    button = new createjs.Text('10',  ' 2rem Arial', '#fff');
+    let button = new createjs.Text('Start', ' 4rem 	Arial', '#fff');
 
     button.x= mywidth/2;
     button.textAlign="center";
@@ -286,34 +284,31 @@ function loaded() {
       
     stage.addChild(button);
 
-//     var pad = 20; //innenrand, padding
-// // Hier wird ein Graphics Objekt erzeugt
-// //dann werden die Eigenschaften wie Füllung Linie etc zugewiesen
+    var pad = 20; //innenrand, padding
+// Hier wird ein Graphics Objekt erzeugt
+//dann werden die Eigenschaften wie Füllung Linie etc zugewiesen
 
-// var g = new createjs.Graphics();
-// g.setStrokeStyle(1);
-// g.beginStroke("#000000");
-// g.beginLinearGradientFill(["#540","black"], [0,1], 0, 20, 0, 320);
-// g.drawRect(button.x - (pad/2) + bounds.x, button.y - pad + bounds.y, bounds.width + pad , bounds.height + pad );
-// //Das Shape wird intialisiert und das Graphics Objekt in der Konstruktorfunktion
-// //zugewiesen. Shape(g)
-// var bg = new createjs.Shape(g);
-// stage.addChildAt(bg, 0);
-//     //click to stop or start the audio
-//     // toggleAudio_menu.addEventListener('click', function(e){
-//     //   inMenuPause();
-//     // });
+var g = new createjs.Graphics();
+g.setStrokeStyle(1);
+g.beginStroke("#000000");
+g.beginLinearGradientFill(["#540","black"], [0,1], 0, 20, 0, 320);
+g.drawRect(button.x - (pad/2) + bounds.x, button.y - pad + bounds.y, bounds.width + pad , bounds.height + pad );
+//Das Shape wird intialisiert und das Graphics Objekt in der Konstruktorfunktion
+//zugewiesen. Shape(g)
+var bg = new createjs.Shape(g);
+stage.addChildAt(bg, 0);
+    //click to stop or start the audio
+    // toggleAudio_menu.addEventListener('click', function(e){
+    //   inMenuPause();
+    // });
 
-// //rmv , toggleAudio_menu instruction, title,title2,
-//     //click on the start game button => start the game
-//     bg.addEventListener('click', function(e){
-//      stage.removeChild(e.target,  button);
-//     //  inMenuPause();
-//       startGame();
-//     });
-
-
-
+//rmv , toggleAudio_menu instruction, title,title2,
+    //click on the start game button => start the game
+    bg.addEventListener('click', function(e){
+     stage.removeChild(e.target,  button);
+    //  inMenuPause();
+      startGame();
+    });
 
     // //click on the instruction button => go to the instruction screen
     // instruction.addEventListener('click', function(e){
@@ -347,31 +342,15 @@ function loaded() {
     //   });
     // }); 
 
-   
-
     createjs.Ticker.framerate=30;
     createjs.Ticker.addEventListener("tick", tock);    
     }
 
 
-function countdown(){
-    
-    counter_on = 1;
-    console.log(counter_on);
-    
-    gamecountdownf();
-  
-    console.log("count1 function");
-}
 
 
     //game running
 function startGame(){
-
-  countdown();
-  setTimeout(function(){
-
-  console.log("start");
 
   stage.mouseMoveOutside = true;
   stage.on("stagemousemove", function(evt) {
@@ -459,7 +438,7 @@ function startGame(){
     stage.addChild( seconds , split , minutes, player, cpu, ball );
 
   //  alert('win');
-},10000);}
+}
     
 function movePaddle(){
     if(keys.u){
@@ -531,42 +510,6 @@ function hitWall(){
   };
 
 
-}
-
-
-
-
-function gamecountdownf(){
-  console.log("here");
-
-  console.log(parseInt(button.text));
-  console.log(counter_on);
-
-  if ( (parseInt(button.text) > 0) && counter_on == 1)
-  {  console.log("minus");
-    button.text = parseInt(button.text - 1);
-
-  }
-    if ( parseInt(button.text) == 0)
-    {  console.log("done");
-      counter_on = 2; 
-    //  settings.gamecountdown=false;
-    //startGame();
-    }
-
-if(counter_on == 2)
-{
-  clearTimeout(countertimeout);
-  
-  //button.text=parseInt(03);
-   stage.removeChild(button);
-   console.log("here");
-   counter_on=0;
-  // startGame();
-
-}
-
-countertimeout = setTimeout(gamecountdownf, 1000);
 }
 
 function timedCount() {

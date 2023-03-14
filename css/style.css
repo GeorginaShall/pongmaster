@@ -1,13 +1,9 @@
-/* canvas {
-    background-image: url("../gfx/img/space.png");
-    background-size: cover; 
-    animation: scroll 25s infinite linear;
-} */
 
 canvas {
     background-color: black;
     background-size: cover; 
     background-position-x: 400px;
+ 
 }
 
 @keyframes scroll {
