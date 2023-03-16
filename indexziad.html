@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    canvas {
+      display: block;
+      margin: auto;
+      background-color: black;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="gameCanvas" width="640" height="480"></canvas>
+  <script>
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+
+    const paddleHeight = 100;
+    const paddleWidth = 10;
+    const ballSize = 10;
+
+    let playerY = (canvas.height - paddleHeight) / 2;
+    let aiY = (canvas.height - paddleHeight) / 2;
+    let ballX = canvas.width / 2;
+    let ballY = canvas.height / 2;
+    let ballSpeedX = 4;
+    let ballSpeedY = 4;
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Draw paddles
+      ctx.fillStyle = "white";
+      ctx.fillRect(0, playerY, paddleWidth, paddleHeight);
+      ctx.fillRect(canvas.width - paddleWidth, aiY, paddleWidth, paddleHeight);
+
+      // Draw ball
+      ctx.beginPath();
+      ctx.arc(ballX, ballY, ballSize, 0, Math.PI * 2);
+      ctx.fill();
+
+      ballX += ballSpeedX;
+      ballY += ballSpeedY;
+
+      // Collision with top and bottom walls
+      if (ballY <= ballSize || ballY >= canvas.height - ballSize) {
+        ballSpeedY = -ballSpeedY;
+      }
+
+      // Collision with paddles
+      if (
+        (ballX <= paddleWidth && ballY > playerY && ballY < playerY + paddleHeight) ||
+        (ballX >= canvas.width - paddleWidth - ballSize && ballY > aiY && ballY < aiY + paddleHeight)
+      ) {
+        ballSpeedX = -ballSpeedX;
+      }
+
+      // Ball out of bounds
+      if (ballX < 0 || ballX > canvas.width) {
+        // Reset ball position
+        ballX = canvas.width / 2;
+        ballY = canvas.height / 2;
+      }
+
+      // Update AI paddle position
+      aiY += (ballY - (aiY + paddleHeight / 2)) * 0.1;
+
+      requestAnimationFrame(draw);
+    }
+
+    canvas.addEventListener("mousemove", (event) => {
+      const rect = canvas.getBoundingClientRect();
+      playerY = event.clientY - rect.top - paddleHeight / 2;
+    });
+
+    draw();
+  </script>
+</body>
+
+</html>

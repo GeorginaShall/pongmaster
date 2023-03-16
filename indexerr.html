@@ -11,13 +11,12 @@
   <script>
 
     $(document).ready(function () {
-      $("#gameCanvas").hide();
-      $("#resultCanvas").hide();
+      $("canvas").hide();
      
       $("#show").click(function () {
-        $("#gameCanvas").show();
+        $("canvas").show();
         $("#welcome").hide();
-       startGame();
+       
       });
     });
 
@@ -45,9 +44,6 @@ position: fixed;
       <div style="text-align: center; padding: 5%;" id="show"> <button style="padding: 2%;">COMMENCEZ!</button></div>
     </div>
   <canvas id="gameCanvas" ></canvas>
-  <canvas id="resultcanvas"></canvas>
-
-
   <script src="vendor/createjs.min.js"></script>
   <script src="https://code.createjs.com/easeljs-0.4.2.min.js"></script>
   <script src="https://code.createjs.com/tweenjs-0.2.0.min.js"></script>
