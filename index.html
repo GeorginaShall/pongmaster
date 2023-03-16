@@ -12,11 +12,31 @@
 
     $(document).ready(function () {
       $("#gameCanvas").hide();
-      $("#resultCanvas").hide();
+      //$("#resultCanvas").hide();
+
+      $("#windiv").hide();
+
+      $("#losediv").hide();
+
+      $("#timesupdiv").hide();
+
      
       $("#show").click(function () {
         $("#gameCanvas").show();
         $("#welcome").hide();
+       startGame();
+      });
+
+      $("#restart").click(function () {
+        $("#gameCanvas").show();
+        $("#welcome").hide();
+        $("#windiv").hide();
+
+        $("#losediv").hide();
+
+        $("#timesupdiv").hide();
+
+
        startGame();
       });
     });
@@ -44,8 +64,38 @@ position: fixed;
       <div  style="text-align: center; padding: 5%;">ATTENTION A NE PAS FAIRE TOMBRE LA CAPSULE!</div>
       <div style="text-align: center; padding: 5%;" id="show"> <button style="padding: 2%;">COMMENCEZ!</button></div>
     </div>
+
+
+    <div style="color: white;   margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);" id="timesupdiv">
+      <div  style="text-align: center; padding: 5%;">Time's Up!</div>
+      <div style="text-align: center; padding: 5%;" id="restart"> <button style="padding: 2%;">RESTART</button></div>
+    </div>
+
+    <div style="color: white;   margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);" id="windiv">
+      <div  style="text-align: center; padding: 5%;">You won!</div>
+      <div style="text-align: center; padding: 5%;" id="restart"> <button style="padding: 2%;">RESTART!</button></div>
+    </div>
+
+    <div style="color: white;   margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);" id="losediv">
+      <div  style="text-align: center; padding: 5%;">You lose!</div>
+      <div style="text-align: center; padding: 5%;" id="restart"> <button style="padding: 2%;">RESTART!</button></div>
+    </div>
+
+
   <canvas id="gameCanvas" ></canvas>
-  <canvas id="resultcanvas"></canvas>
+
 
 
   <script src="vendor/createjs.min.js"></script>

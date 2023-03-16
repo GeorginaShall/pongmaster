@@ -714,6 +714,11 @@ function alert(e) {
 
     settings.gameRunning = false;
     timer_on = 0;
+
+    $("#windiv").show();
+   
+    /*
+ remove this cmnt     add restart
     createjs.Sound.stop();
 
     //win = new createjs.Bitmap(queue.getResult('win'));
@@ -762,6 +767,7 @@ function alert(e) {
       stage.removeChild(e.target, win, restartt);
       restartGame();
     });
+    */
 
   } else if (e == "lose") {
     settings.gameRunning = false;
@@ -769,7 +775,11 @@ function alert(e) {
 
     console.log("lose");
 
-    
+    $("#losediv").show();
+
+
+/*
+ remove this cmnt    
     createjs.Sound.stop();
 
     lose = new createjs.Text("GameOver!", " 4rem Arial", "#fff");
@@ -818,6 +828,7 @@ function alert(e) {
       restartGame();
     });
 
+*/
     //rmv toggleAudio_game,
     //stage.removeChild(restart_game);
   } else if (e == "timesup") {
@@ -830,8 +841,12 @@ function alert(e) {
     console.log("timeup");
     settings.gameRunning = false;
     timer_on = 0;
-    
 
+    $("#timesupdiv").show();
+
+
+    /*
+ remove this cmnt  
     timesup = new createjs.Text("Time is \n Up!", " 4rem Arial", "#fff");
     timesup.x = stage.canvas.width / 2;
     timesup.y = stage.canvas.height / 4;
@@ -877,6 +892,7 @@ function alert(e) {
       stage.removeChild(e.target, timesup, restartt);
       restartGame();
     });
+    */
 
   }
 }
