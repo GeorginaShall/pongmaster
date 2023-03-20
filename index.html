@@ -11,23 +11,43 @@
   <script>
 
     $(document).ready(function () {
-      $("#gameCanvas").hide();
+     // $("#gameCanvas").style.display = "none";
+      document.getElementById("gameCanvas").style.display = "none";
       //$("#resultCanvas").hide();
 
-      $("#windiv").hide();
+      //$("#windiv").style.display = "none";
+      //document.getElementById("windiv").style.display = "none";
 
-      $("#losediv").hide();
 
-      $("#timesupdiv").hide();
+      //$("#losediv").style.display = "none";
+      //document.getElementById("losediv").style.display = "none";
+
+
+     // $("#timesupdiv").style.display = "none";
+      //document.getElementById("timesupdiv").style.display = "none";
+
 
      
       $("#show").click(function () {
         $("#gameCanvas").show();
         $("#welcome").hide();
+        counter_on = 1;
        startGame();
       });
 
-      $("#restart").click(function () {
+
+    });
+
+
+      // $("#restart").click(function () {
+
+
+
+      //  
+      // });
+
+      function restart(){
+                console.log("restart clicked")
         $("#gameCanvas").show();
         $("#welcome").hide();
         $("#windiv").hide();
@@ -35,12 +55,13 @@
         $("#losediv").hide();
 
         $("#timesupdiv").hide();
-
-
-       startGame();
-      });
-    });
-
+      //  clearTimeout(timeout);
+        console.log("neeeeeeewwwwwwwwwwwwwwww tiiiiiiiiiiiime"+timeout);
+        reset();
+        console.log(seconds);
+        counter_on = 1;
+        startGame();
+      }
   </script>
 </head>
 
@@ -70,27 +91,27 @@ position: fixed;
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);" id="timesupdiv">
+    transform: translate(-50%, -50%); display: none;" id="timesupdiv">
       <div  style="text-align: center; padding: 5%;">Time's Up!</div>
-      <div style="text-align: center; padding: 5%;" id="restart"> <button style="padding: 2%;">RESTART</button></div>
+      <div style="text-align: center; padding: 5%;" id="restart" onclick="restart()"> <button style="padding: 2%;">RESTART</button></div>
     </div>
 
     <div style="color: white;   margin: 0;
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);" id="windiv">
+    transform: translate(-50%, -50%);  display: none;" id="windiv">
       <div  style="text-align: center; padding: 5%;">You won!</div>
-      <div style="text-align: center; padding: 5%;" id="restart"> <button style="padding: 2%;">RESTART!</button></div>
+      <div style="text-align: center; padding: 5%;" id="restart" onclick="restart()"> <button style="padding: 2%;">RESTART!</button></div>
     </div>
 
     <div style="color: white;   margin: 0;
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);" id="losediv">
+    transform: translate(-50%, -50%);  display: none;" id="losediv">
       <div  style="text-align: center; padding: 5%;">You lose!</div>
-      <div style="text-align: center; padding: 5%;" id="restart"> <button style="padding: 2%;">RESTART!</button></div>
+      <div style="text-align: center; padding: 5%;" id="restart" onclick="restart()"> <button style="padding: 2%;">RESTART!</button></div>
     </div>
 
 

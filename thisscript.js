@@ -668,6 +668,46 @@ function moveCpu() {
   if (cpu.x <= 0) {
     cpu.x = 0;
   }
+
+  //version2
+  // if (aiX + paddleWidth / 2 < ballX - ballSize) {
+  //   //
+  //   aiX = aiX + cpuSpeed;
+
+  //   console.log("cpux=" + aiX);
+
+  //   // if((cpu.x - ((cpu.image.width)/2)) < 0) { //left wall
+  //   //   cpu.x =0;
+
+  //   // }
+  //   // if((cpu.x - ((cpu.image.width)/2)) == 0) { //left wall
+  //   //   cpu.x = cpuSpeed;; } }
+  // } else if (aiX + paddleWidth / 2 > ballX + ballSize) {
+  //   // ||((cpu.x + (cpu.image.width)) > mywidth)
+  //   aiX = aiX - cpuSpeed;
+  // }
+
+  // if (aiX >= mywidth - paddleWidth) {
+  //   //stop the paddle from going out of canvas *1.5
+  //   aiX = mywidth - paddleWidth; //*1.5
+  // }
+  // if (aiX <= 0) {
+  //   aiX = 0;
+  // }
+
+
+  // // ballSpeedX +=0.2;
+  // // //commulative speed
+  // // if(ballSpeedY>0)
+  // // {
+  // //   ballSpeedY +=0.2;
+  // // }
+  // // if(ballSpeedY<0)
+  // // {
+  // //   ballSpeedY -=0.2;
+         
+
+  // // }
 }
 
 function hitTest() {
