@@ -113,30 +113,10 @@ let cpuSpeed = 4; // 4.5;
 
 
 
-
-
-
-
-function preload() {
+function loaded() {
   stage = new createjs.Stage("gameCanvas");
   stage.mouseEventsEnabled = true;
   createjs.Touch.enable(stage);
-
-
-  queue = new createjs.LoadQueue(true);
-  queue.installPlugin(createjs.Sound);
-  queue.loadManifest([
-
-    { id: "restart", src: "gfx/img/restart_button.png" },
-    { id: "timesup", src: "gfx/img/timesUp.png" },
-  ]);
-
-  //  queue.addEventListener('progress', progress);
-  queue.addEventListener("complete", loaded);
-}
-
-
-function loaded() {
 
   createjs.Ticker.framerate = 30;
   createjs.Ticker.addEventListener("tick", tock);
@@ -624,4 +604,4 @@ function tock(e) {
 
   stage.update(e);
 }
-window.addEventListener("load", preload);
+window.addEventListener("load", loaded);
