@@ -232,6 +232,11 @@ console.log("TIMEOUT"+countertimeout);
 function draw() {
 
   if(settings.gameRunning){
+
+    
+
+
+
 console.log("draw");
   ctx.clearRect(0, 0, mywidth, myheight);
 
@@ -330,21 +335,23 @@ console.log(ballY , myheight);
 
 //game running
 function startGame() {
+  stage.mouseEventsEnabled = true;
 
+  canvas1.addEventListener("mousemove", (event) => {
 
-canvas1.addEventListener("mousemove", (event) => {
-  const rect = canvas1.getBoundingClientRect();
-  playerX = event.clientX - rect.top - paddleWidth / 2;
-
-  if (playerX >= mywidth - paddleWidth) {
-    //stop the paddle from going out of canvas *1.5
-    playerX = mywidth - paddleWidth; //*1.5
-  }
-  if (playerX <= 0) {
-    playerX = 0;
-  }
-});
-
+    console.log("detectedddddddddddddddddddddddd");
+    const rect = canvas1.getBoundingClientRect();
+    playerX = event.clientX - rect.top - paddleWidth / 2;
+  
+    if (playerX >= mywidth - paddleWidth) {
+      //stop the paddle from going out of canvas *1.5
+      playerX = mywidth - paddleWidth; //*1.5
+    }
+    if (playerX <= 0) {
+      playerX = 0;
+    }
+  });
+  
 
 
   settings.gamecountdown = true;
@@ -605,3 +612,5 @@ function tock(e) {
   stage.update(e);
 }
 window.addEventListener("load", loaded);
+//window.addEventListener("load", startGame);
+

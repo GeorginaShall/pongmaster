@@ -15,7 +15,9 @@
       document.getElementById("gameCanvas").style.display = "none";
      
       $("#show").click(function () {
+        console.log("clicked");
         $("#gameCanvas").show();
+        document.getElementById("gameCanvas").style.zIndex = "100";
         $("#welcome").hide();
         counter_on = 1;
        startGame();
@@ -47,7 +49,7 @@
         counter_on = 1;
         startGame();
       }
-  </script>
+</script>
 </head>
 
 <body
