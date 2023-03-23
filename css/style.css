@@ -1,8 +1,14 @@
 
 canvas {
-    background-color: black;
+    /* background-color: black;
     background-size: cover; 
-    background-position-x: 400px;
+    background-position-x: 400px; */
+
+    background-image: url('gfx/img/Retails\ -\ Screen\ 1/Background.png');
+
+background-size: cover;
+background-repeat: no-repeat;
+background-size: 100vw 100vh;
  
 }
 
@@ -17,3 +23,4 @@ a.button {
   color: initial;
   cursor: pointer;
 }
+

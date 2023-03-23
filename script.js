@@ -1,5 +1,11 @@
 const canvas1 = document.getElementById("gameCanvas");
 const ctx = canvas1.getContext("2d");
+const image = document.getElementById("source");
+
+
+var img = new Image();
+
+
 
 let myheight, mywidth;
 
@@ -136,11 +142,25 @@ function loaded() {
 
 function drawcounter(){
   if(settings.gamecountdown){
-  
+
+
+   
+
+
 // Draw paddles
-ctx.fillStyle = "white";
-ctx.fillRect(playerX, playerY, paddleWidth, paddleHeight);
-ctx.fillRect(aiX, aiY, paddleWidth, paddleHeight);
+ctx.fillStyle = "blue";
+// ctx.roundRect(playerX, playerY, paddleWidth, paddleHeight, [400]);
+
+
+ctx.beginPath();
+ctx.roundRect(playerX, playerY, paddleWidth, paddleHeight, [40]);
+ctx.fill();
+
+ctx.beginPath();
+ctx.roundRect(aiX, aiY, paddleWidth, paddleHeight, [40]);
+ctx.fill();
+
+//ctx.fillRect(aiX, aiY, paddleWidth, paddleHeight);
 
 
 
@@ -149,6 +169,12 @@ ctx.textAlign = "center"
 
 ctx.fillStyle="white",
 ctx.fillText( counternumber , mywidth / 2 , myheight/2)
+
+//ctx.drawImage(image, 0, 0, 10, 12);
+img.src = "gfx/img/logo.svg";
+//img.onload = function() {
+    ctx.drawImage(img, mywidth / 2 - (img.width /2), 0);
+//}
 
 
 requestAnimationFrame(drawcounter);
@@ -242,22 +268,51 @@ console.log("draw");
 
 
   // Draw paddles
-  ctx.fillStyle = "white";
-  ctx.fillRect(playerX, playerY, paddleWidth, paddleHeight);
-  ctx.fillRect(aiX, aiY, paddleWidth, paddleHeight);
+  ctx.fillStyle = "blue";
+  // ctx.fillRect(playerX, playerY, paddleWidth, paddleHeight);
+  // ctx.fillRect(aiX, aiY, paddleWidth, paddleHeight);
 
+  ctx.beginPath();
+ctx.roundRect(playerX, playerY, paddleWidth, paddleHeight, [40]);
+ctx.fill();
+
+ctx.beginPath();
+ctx.roundRect(aiX, aiY, paddleWidth, paddleHeight, [40]);
+ctx.fill();
+
+ctx.fillStyle = "mediumvioletred";
   // Draw ball
   ctx.beginPath();
   ctx.arc(ballX, ballY, ballSize, 0, Math.PI * 2);
   ctx.fill();
 
-  ctx.font = 48 + "px " + 'verdana' + " " + "white"
+  ctx.strokeStyle = "mediumvioletred";
+  ctx.moveTo(0, img.height + 25);
+  // End point (180,47)
+  ctx.lineTo(mywidth, img.height + 25);
+  // Make the line visible
+  ctx.stroke();
+
+
+  img.src = "gfx/img/logo.svg";
+  ctx.drawImage(img, mywidth / 2 - (img.width /2), 0);
+
+  ctx.fillStyle='mediumvioletred';
+ // ctx.fillRect( mywidth / 2 - 50 , img.height , 100, 50)
+
+
+  ctx.beginPath();
+  ctx.roundRect( mywidth / 2 - 50 , img.height , 100, 50, 3);
+  ctx.fill();
+
+
+
+
+  ctx.font = 32 + "px " + 'verdana' + " " + "white"
   ctx.textAlign = "center"
-  ctx.fillStyle = "black"
-  ctx.fillStyle='black';
-  ctx.fillRect(0, 0, ctx.canvas.width, 50)
+
   ctx.fillStyle="white",
-  ctx.fillText( minutes + " : " + seconds, mywidth / 2 , 50)
+  ctx.fillText( minutes + " : " + seconds, mywidth / 2 , img.height*1.5)
 
 
   console.log(seconds);
