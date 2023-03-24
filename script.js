@@ -71,7 +71,7 @@ let ballSpeedY = 4;
 let playerX =mywidth / 2 - paddleWidth / 2;
 let playerY = myheight - 25 ;
 let aiX = mywidth / 2 - paddleWidth / 2 ;
-let aiY = 220 ;
+let aiY = 200 ;
 let ballX = mywidth / 2 - ballSize / 2;
 let ballY = myheight / 2 - ballSize / 2;
 
@@ -575,7 +575,7 @@ counternumber =4;
   playerX =mywidth / 2 - paddleWidth / 2;
  playerY = myheight - 25 ;
  aiX = mywidth / 2 - paddleWidth / 2 ;
- aiY = 300;
+ aiY = 200;
  ballX = mywidth / 2 - ballSize / 2;
  ballY = myheight / 2 - ballSize / 2;
 }
