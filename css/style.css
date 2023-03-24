@@ -31,6 +31,31 @@
     font-family: 'pm_futurisbold';
 }
 
+.heading1 {
+    font-size: 60px;
+}
+.heading2{
+    font-size: 56px ;
+}
+.heading3{
+    font-size: 47.5px;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .heading1 {
+      font-size: 20px;
+    }
+    .heading2{
+        font-size: 18.6px;
+    }
+    .heading3{
+        font-size: 16px;
+    }
+  }
+
+
+  
 canvas {
     /* background-color: black;
     background-size: cover; 
