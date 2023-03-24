@@ -29,18 +29,41 @@
 }
 *{
     font-family: 'pm_futurisbold';
+
 }
 
 .heading1 {
     font-size: 60px;
+    text-transform: uppercase;
 }
 .heading2{
     font-size: 56px ;
+    text-transform: uppercase;
 }
 .heading3{
     font-size: 47.5px;
+    text-transform: uppercase;
 }
-
+.bravo{
+    font-size: 79px;
+    text-transform: uppercase;
+}
+.jouez{
+    font-size: 66px;
+    text-transform: uppercase;
+}
+.gagne-desole{
+    font-size: 62px;
+      text-transform: uppercase;
+}
+.merci{
+    font-size: 48px;
+    text-transform: uppercase;
+}
+.commencez{
+    font-size: 58px;
+    text-transform: uppercase;
+}
 
 @media only screen and (max-width: 600px) {
     .heading1 {
@@ -52,10 +75,25 @@
     .heading3{
         font-size: 16px;
     }
+    .bravo{
+        font-size: 26.3px;
+    }
+    .jouez{
+        font-size: 22px;
+    }
+    .gagne-desole{
+        font-size: 21px;
+    }
+    .merci{
+        font-size: 16px;
+    }
+    .commencez{
+        font-size: 19.3px;
+    }
   }
 
 
-  
+
 canvas {
     /* background-color: black;
     background-size: cover; 

@@ -71,7 +71,7 @@ let ballSpeedY = 4;
 let playerX =mywidth / 2 - paddleWidth / 2;
 let playerY = myheight - 25 ;
 let aiX = mywidth / 2 - paddleWidth / 2 ;
-let aiY = 55;
+let aiY = 220 ;
 let ballX = mywidth / 2 - ballSize / 2;
 let ballY = myheight / 2 - ballSize / 2;
 
@@ -154,21 +154,43 @@ function drawcounter(){
   if(settings.gamecountdown){
 
 
-   
 
 
-// Draw paddles
-ctx.fillStyle = "blue";
-// ctx.roundRect(playerX, playerY, paddleWidth, paddleHeight, [400]);
+    console.log("draw counter");
+    ctx.clearRect(0, 0, mywidth, myheight);
+  
+  
+    // Draw paddles
+    ctx.fillStyle = "blue";
+    // ctx.fillRect(playerX, playerY, paddleWidth, paddleHeight);
+    // ctx.fillRect(aiX, aiY, paddleWidth, paddleHeight);
+  
+    ctx.beginPath();
+  ctx.roundRect(playerX, playerY, paddleWidth, paddleHeight, [40]);
+  ctx.fill();
+  
+  ctx.beginPath();
+  ctx.roundRect(aiX, aiY, paddleWidth, paddleHeight, [40]);
+  ctx.fill();
+  
 
 
-ctx.beginPath();
-ctx.roundRect(playerX, playerY, paddleWidth, paddleHeight, [40]);
-ctx.fill();
+  
+    ctx.strokeStyle = "mediumvioletred";  
+     ctx.beginPath();
+    ctx.moveTo(0, img.height + 65);
+    // End point (180,47)
+    ctx.lineTo(mywidth, img.height + 65);
+    // Make the line visible
+    ctx.stroke();
+  
+  
+    img.src = "gfx/img/logo.svg";
+    ctx.drawImage(img, mywidth / 2 - (img.width /2), 0);
+  
 
-ctx.beginPath();
-ctx.roundRect(aiX, aiY, paddleWidth, paddleHeight, [40]);
-ctx.fill();
+
+
 
 //ctx.fillRect(aiX, aiY, paddleWidth, paddleHeight);
 
@@ -178,13 +200,8 @@ ctx.textAlign = "center"
 ctx.fillStyle="white",
 ctx.fillText( counternumber , mywidth / 2 , myheight/2)
 
-
-
-//ctx.drawImage(image, 0, 0, 10, 12);
-img.src = "gfx/img/logo.svg";
-//img.onload = function() {
-    ctx.drawImage(img, mywidth / 2 - (img.width /2), 0);
-//}
+   
+ 
 
 
 requestAnimationFrame(drawcounter);
@@ -297,9 +314,9 @@ ctx.fillStyle = "mediumvioletred";
   ctx.fill();
 
   ctx.strokeStyle = "mediumvioletred";
-  ctx.moveTo(0, img.height + 25);
+  ctx.moveTo(0, img.height + 65);
   // End point (180,47)
-  ctx.lineTo(mywidth, img.height + 25);
+  ctx.lineTo(mywidth, img.height + 65 );
   // Make the line visible
   ctx.stroke();
 
@@ -311,18 +328,21 @@ ctx.fillStyle = "mediumvioletred";
  // ctx.fillRect( mywidth / 2 - 50 , img.height , 100, 50)
 
 
+  // ctx.beginPath();
+  // ctx.roundRect( mywidth / 2 - 50 , img.height , 100, 50, 3);
+  // ctx.fill();
+
+
   ctx.beginPath();
-  ctx.roundRect( mywidth / 2 - 50 , img.height , 100, 50, 3);
+  ctx.roundRect( mywidth / 2 - 100 , img.height +37.5 , 200, 50, 3);
   ctx.fill();
 
-
-
-
-  ctx.font = "32 px  myFont" + "white"
+//25px
+  ctx.font = "83 px myFont" + "white"
   ctx.textAlign = "center"
 
   ctx.fillStyle="white",
-  ctx.fillText( minutes + " : " + seconds, mywidth / 2 , img.height*1.5)
+  ctx.fillText( minutes + " : " + seconds, mywidth / 2 , img.height+ 78.5)
 
 
   console.log(seconds);
@@ -394,6 +414,8 @@ console.log(ballY , myheight);
   // Update AI paddle position
   aiX += (ballX - (aiX + paddleWidth / 2)) * 0.1;
 
+
+
   requestAnimationFrame(draw);}
 }
 
@@ -408,22 +430,16 @@ function startGame() {
   //   const rect = canvas1.getBoundingClientRect();
   //   playerX = event.clientX - rect.top - paddleWidth / 2;
   
-  //   if (playerX >= mywidth - paddleWidth) {
-  //     //stop the paddle from going out of canvas *1.5
-  //     playerX = mywidth - paddleWidth; //*1.5
-  //   }
-  //   if (playerX <= 0) {
-  //     playerX = 0;
-  //   }
+
   // });
   
-  stage.mouseMoveOutside = true;
+  //stage.mouseMoveOutside = true;
   stage.on("stagemousemove", function(evt) {
-
-    playerX=evt.stageX;
-  
-
-    });
+  if(evt.stageX < mywidth - paddleWidth/2)
+      playerX=evt.stageX;
+  else
+  playerX=mywidth- paddleWidth;
+      });
    
   settings.gamecountdown = true;
 
@@ -559,7 +575,7 @@ counternumber =4;
   playerX =mywidth / 2 - paddleWidth / 2;
  playerY = myheight - 25 ;
  aiX = mywidth / 2 - paddleWidth / 2 ;
- aiY = 55;
+ aiY = 300;
  ballX = mywidth / 2 - ballSize / 2;
  ballY = myheight / 2 - ballSize / 2;
 }
