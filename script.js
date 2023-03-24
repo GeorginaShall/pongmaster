@@ -3,6 +3,16 @@ const ctx = canvas1.getContext("2d");
 const image = document.getElementById("source");
 
 
+var myFont = new FontFace('myFont', 'url(css/font/pmft85-webfont.ttf)');
+
+myFont.load().then(function(font){
+
+  // with canvas, if this is ommited won't work
+  document.fonts.add(font);
+
+  console.log('Font loaded');
+});
+
 var img = new Image();
 
 
@@ -162,13 +172,13 @@ ctx.fill();
 
 //ctx.fillRect(aiX, aiY, paddleWidth, paddleHeight);
 
-
-
-ctx.font = 48 + "px " + 'verdana' + " " + "white"
+  ctx.font = "50px myFont"; 
 ctx.textAlign = "center"
 
 ctx.fillStyle="white",
 ctx.fillText( counternumber , mywidth / 2 , myheight/2)
+
+
 
 //ctx.drawImage(image, 0, 0, 10, 12);
 img.src = "gfx/img/logo.svg";
@@ -308,7 +318,7 @@ ctx.fillStyle = "mediumvioletred";
 
 
 
-  ctx.font = 32 + "px " + 'verdana' + " " + "white"
+  ctx.font = "32 px  myFont" + "white"
   ctx.textAlign = "center"
 
   ctx.fillStyle="white",
@@ -390,25 +400,31 @@ console.log(ballY , myheight);
 
 //game running
 function startGame() {
-  stage.mouseEventsEnabled = true;
+  // stage.mouseEventsEnabled = true;
 
-  canvas1.addEventListener("mousemove", (event) => {
+  // canvas1.addEventListener("mousemove", (event) => {
 
-    console.log("detectedddddddddddddddddddddddd");
-    const rect = canvas1.getBoundingClientRect();
-    playerX = event.clientX - rect.top - paddleWidth / 2;
+  //   console.log("detectedddddddddddddddddddddddd");
+  //   const rect = canvas1.getBoundingClientRect();
+  //   playerX = event.clientX - rect.top - paddleWidth / 2;
   
-    if (playerX >= mywidth - paddleWidth) {
-      //stop the paddle from going out of canvas *1.5
-      playerX = mywidth - paddleWidth; //*1.5
-    }
-    if (playerX <= 0) {
-      playerX = 0;
-    }
-  });
+  //   if (playerX >= mywidth - paddleWidth) {
+  //     //stop the paddle from going out of canvas *1.5
+  //     playerX = mywidth - paddleWidth; //*1.5
+  //   }
+  //   if (playerX <= 0) {
+  //     playerX = 0;
+  //   }
+  // });
+  
+  stage.mouseMoveOutside = true;
+  stage.on("stagemousemove", function(evt) {
+
+    playerX=evt.stageX;
   
 
-
+    });
+   
   settings.gamecountdown = true;
 
   console.log("start "+ settings.gamecountdown + counter_on) ;
@@ -438,11 +454,11 @@ function startGame() {
       timedCount();
     }
 
-    playerScore = new createjs.Text("0", " 2rem Arial", "#fff");
+    playerScore = new createjs.Text("0", " 2rem ", "#fff");
     //  playerScore.x = (mywidth/2) - 40;
     //  playerScore.y = 5;
 
-    cpuScore = new createjs.Text("0", " 2rem Arial", "#fff");
+    cpuScore = new createjs.Text("0", " 2rem ", "#fff");
     //  cpuScore.x = (mywidth/2) + 40;
     //  cpuScore.y = 5;
 

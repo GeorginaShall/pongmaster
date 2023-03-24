@@ -23,6 +23,10 @@
 
 }
 
+
+.fontt{
+    font-family: 'pm_futurisbold';
+}
 *{
     font-family: 'pm_futurisbold';
 }
@@ -32,7 +36,7 @@ canvas {
     background-size: cover; 
     background-position-x: 400px; */
 
-    background-image: url('gfx/img/Retails\ -\ Screen\ 1/Background.png');
+    background-image: url('../gfx/img/Retails\ -\ Screen\ 1/Background.png');
 
 background-size: cover;
 background-repeat: no-repeat;
